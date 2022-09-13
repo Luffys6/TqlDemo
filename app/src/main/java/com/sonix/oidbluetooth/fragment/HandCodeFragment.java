@@ -322,10 +322,11 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 layoutParams.leftMargin = left;
                 layoutParams.topMargin = top;
                 view.setBackgroundResource(R.drawable.shape_black_border);
+                int finalI = i1;
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showReplayDialog();
+                        showReplayDialog(finalI);
                     }
                 });
                 view.setLayoutParams(layoutParams);
@@ -338,26 +339,26 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
      */
     private int area = -1;
 
-    private void isRect(int x, int y, Dot.DotType type, int force) {
+    private void isRect(int x, int y, Dot dot) {
         if (posListBeans == null) {
             return;
         }
         for (int i = 0; i < posListBeans.size(); i++) {
             if (x >= posListBeans.get(i).getX() && y >= posListBeans.get(i).getY() && x <= posListBeans.get(i).getAx() && y <= posListBeans.get(i).getAy()) {
-                int pointZ = force;
+                int pointZ = dot.force;
 
                 if (pointZ > 0) {
-                    if (type == Dot.DotType.PEN_DOWN) {
+                    if (dot.type == Dot.DotType.PEN_DOWN) {
                         movePoints = new ArrayList<>();
                         pointsBean = new PointsBean();
                         movePoints.add(new Point((int) pointX, (int) pointY));
                         mPenView.processDot(pointX, pointY, pointZ, 0);
                     }
-                    if (type == Dot.DotType.PEN_MOVE) {
+                    if (dot.type == Dot.DotType.PEN_MOVE) {
                         movePoints.add(new Point((int) pointX, (int) pointY));
                         mPenView.processDot(pointX, pointY, pointZ, 1);
                     }
-                } else if (type == Dot.DotType.PEN_UP) {
+                } else if (dot.type == Dot.DotType.PEN_UP) {
                     if (movePoints == null) {
                         return;
                     }
@@ -370,6 +371,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     pointsBeans.add(pointsBean);
                     mPenView.processDot(pointX, pointY, pointZ, 2);
                 }
+                dot_word.put(i, dot);
                 if (area != i) {
                     area = i;
                     //提交
@@ -780,7 +782,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         }
 
 //        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
-        isRect((int) pointX, (int) pointY, dot.type, dot.force);
+        isRect((int) pointX, (int) pointY, dot);
         /**
          * start
          */
@@ -1264,25 +1266,55 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private void Replay(int index, DrawView mPenView) {
+        List<Dot> dots = dot_word.get(index);
+        if (dots == null || dots.isEmpty()) {
+            bIsReplay = false;
+            return;
+        }
+        bIsReplay = true;
+        gReplayTotalNumber = dots.size();
+        gReplayCurrentNumber = 0;
+        for (final Dot dot : dots) {
+            //笔锋绘制方法
+            if (bIsReplay) {
+                SetPenColor(dot.color);
+                mPenView.processDot(dot);
+                gReplayCurrentNumber++;
+                if (popup instanceof PopupReplay && popup.isShowing()) {
+                    gSpeed = ((PopupReplay) popup).getSpeed();
+                }
+                SystemClock.sleep((6 - gSpeed) * 10);
+//                mHandle.sendEmptyMessage(MSG_REPLAY);
+            }
+        }
+
+
+        bIsReplay = false;
+        if (popup instanceof PopupReplay) {
+            ((PopupReplay) popup).setStart(false);
+        }
+    }
+
     /**
      *
      */
-    private void showReplayDialog() {
+    private void showReplayDialog(int index) {
         if (dialog == null) {
             dialog = new Dialog(activity, R.style.customDialog);
         }
-        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_clear, null);
+        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_replay, null);
 
-        TextView cancel = view.findViewById(R.id.tv_cancel);
-        TextView delete = view.findViewById(R.id.tv_ok);
+        DrawView penview_dialog = view.findViewById(R.id.penview_dialog);
+        TextView evaluate = view.findViewById(R.id.evaluate);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+            public void run() {
+                Replay(index, penview_dialog);
             }
-        });
-        delete.setOnClickListener(new View.OnClickListener() {
+        }, 3000);
+        evaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mPenView != null) {
@@ -1296,8 +1328,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         });
 
         dialog.setContentView(view);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+
 
         dialog.show();
     }
