@@ -325,7 +325,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        showReplayDialog();
                     }
                 });
                 view.setLayoutParams(layoutParams);
@@ -367,32 +367,19 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     }
                     pointsBean.setMovePoint(movePoints);
                     pointsBean.setIndex(i);
-//                        onSave();
                     pointsBeans.add(pointsBean);
                     mPenView.processDot(pointX, pointY, pointZ, 2);
                 }
                 if (area != i) {
                     area = i;
                     //提交
-                    if (pointsBeans!=null&&pointsBeans.size()>0){
+                    if (pointsBeans != null && pointsBeans.size() > 0) {
                         onSave();
                     }
-//                    LogUtils.showLog("ddddd","区域"+i+"里面执行了几次="+framePoints);
-//                    PointsBean.FrameBean frameBean = new PointsBean.FrameBean();
-//                    frameBean.setIndex(i);
-//                    frameBean.setFramePoints(framePoints);
-//                    frameBeans.add(frameBean);
-
-                } else {
-
                 }
 
-//                LogUtils.showLog("ddddd","外面区域"+i+"里面执行了几次="+framePoints);
-//                map.put(i,framePoints);
             }
         }
-//        LogUtils.showLog("ddddd","里面执行了几次="+map.toString());
-//        LogUtils.showLog("ddddd","涉及的区域="+num.toString());
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -1242,6 +1229,45 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
      * 清除
      */
     private void showClearDialog() {
+        if (dialog == null) {
+            dialog = new Dialog(activity, R.style.customDialog);
+        }
+        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_clear, null);
+
+        TextView cancel = view.findViewById(R.id.tv_cancel);
+        TextView delete = view.findViewById(R.id.tv_ok);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mPenView != null) {
+                    mPenView.reset();
+                }
+                if (!bIsReplay) {
+                    dot_number.clear();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
+        dialog.show();
+    }
+
+
+    /**
+     *
+     */
+    private void showReplayDialog() {
         if (dialog == null) {
             dialog = new Dialog(activity, R.style.customDialog);
         }
