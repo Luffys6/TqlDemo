@@ -374,7 +374,9 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 if (area != i) {
                     area = i;
                     //提交
-                    onSave();
+                    if (pointsBeans!=null&&pointsBeans.size()>0){
+                        onSave();
+                    }
 //                    LogUtils.showLog("ddddd","区域"+i+"里面执行了几次="+framePoints);
 //                    PointsBean.FrameBean frameBean = new PointsBean.FrameBean();
 //                    frameBean.setIndex(i);
@@ -778,7 +780,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         //拼接整数位和小数位dot点
         float x = DotUtils.joiningTogether(dot.x, dot.fx);
         float y = DotUtils.joiningTogether(dot.y, dot.fy);
-        LogUtils.e("dbj111", "x :" + x + ",,y" + y);
+//        LogUtils.e("dbj111", "x :" + x + ",,y" + y);
 
 //        showHandCode(dot);//显示手写
 
@@ -790,7 +792,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             pointY = DotUtils.getPoint(y, mPenView.getBG_HEIGHT(), mPenView.getPAPER_HEIGHT(), DotUtils.getDistPerunit());
         }
 
-        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
+//        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
         isRect((int) pointX, (int) pointY, dot.type, dot.force);
         /**
          * start
@@ -844,12 +846,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         LogUtils.e("dbj", pos);
         pointsBeans.clear();
         Map<String, String> params = new HashMap<>();
-//        params.put("section_id",   gCurSectionID+"");
-
-//        params.put("own_id", gCurOwnerID+"");
-//        params.put("bid", ""+gCurBookID);
-//        params.put("pid", gCurPageID+"");
-//        params.put("user_id", "1");
         params.put("pos_list", pos);
         OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.162:8031/tea/save_pos_new/", new LoadCallBack<String>(getActivity(), false) {
             @Override
