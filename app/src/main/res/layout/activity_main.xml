@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/main_top_rl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:text="@string/smartpen"
+            android:textColor="#151515"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_pen_status"
+            android:layout_width="135dp"
+            android:singleLine="true"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:text="@string/not_connect_pen"
+            android:textColor="#3AA0ED" />
+
+        <LinearLayout
+            android:id="@+id/ll_distance"
+            android:background="@drawable/main_tv_layout_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp">
+            <TextView
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:paddingLeft="8dp"
+                android:elevation="1dp"
+                android:paddingRight="8dp"
+                android:background="@drawable/main_tv_bg"
+                android:id="@+id/tv_hand_code"
+                android:layout_width="wrap_content"
+                android:text="手写码"
+                android:textSize="14sp"
+                android:textColor="@color/result_view"
+                android:gravity="center"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:elevation="1dp"
+                android:layout_margin="1dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:id="@+id/tv_point_read_tv"
+                android:layout_width="wrap_content"
+                android:text="点读码"
+                android:textSize="14sp"
+                android:textColor="@color/result_view"
+                android:gravity="center"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/id_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/main_top_rl" />
+
+</RelativeLayout>

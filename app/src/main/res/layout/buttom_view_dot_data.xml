@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:paddingLeft="@dimen/dp_10"
+    android:id="@+id/ll_show_hand_code"
+    android:layout_height="wrap_content">
+        <TextView
+            android:text="SID = "
+            android:id="@+id/tv_Sid_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_below="@+id/tv_Sid_hand"
+            android:text="OID = "
+            android:id="@+id/tv_Oid_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_below="@+id/tv_Oid_hand"
+            android:text="BID = "
+            android:id="@+id/tv_Bid_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="PID = "
+            android:layout_below="@+id/tv_Bid_hand"
+            android:id="@+id/tv_Pid_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="X = "
+            android:layout_below="@+id/tv_Pid_hand"
+            android:id="@+id/tv_x_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Y = "
+            android:id="@+id/tv_y_hand"
+            android:layout_below="@+id/tv_x_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_force_hand"
+            android:text="force = "
+            android:layout_below="@+id/tv_y_hand"
+            android:textColor="@color/result_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>

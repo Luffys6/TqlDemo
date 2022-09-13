@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <style name="customDialog" parent="@android:style/Theme.Holo.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否浮现在activity之上,dialog可以被软键盘顶起来而不是覆盖 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0.2</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 满屏，状态栏 -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+
+    </style>
+
+    <style name="customDialog2" parent="@android:style/Theme.Holo.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否浮现在activity之上,dialog可以被软键盘顶起来而不是覆盖 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 满屏，状态栏 -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+
+    </style>
+
+
+    <!--  显示进度条  -->
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+</resources>

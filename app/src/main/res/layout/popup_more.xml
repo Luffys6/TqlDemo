@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_go_connect"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="选项"
+            android:textColor="#000000" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_recognition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_recognition"
+            app:img_width="20dp"
+            app:text="@string/bjsb"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_offline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_offline"
+                app:img_width="20dp"
+                app:text="@string/lxsj"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="20dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/icon_next" />
+        </LinearLayout>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_bt_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_parameter"
+            app:img_width="20dp"
+            app:text="@string/dcrz"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_parameter"
+            app:img_width="20dp"
+            app:text="@string/bcs"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_ota"
+            app:img_width="20dp"
+            app:text="@string/bt_update"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_mcu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_ota"
+            app:img_width="20dp"
+            app:text="@string/mcu_update"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_mcu_ota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_ota"
+            app:img_width="20dp"
+            app:text="@string/mcu_bt_update"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_txt"
+            app:img_width="20dp"
+            app:text="@string/txt"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:id="@+id/ll_save_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_save"
+                app:img_width="20dp"
+                app:text="@string/save_log"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:id="@+id/sw_save_log"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_stroke"
+                app:img_width="20dp"
+                app:text="@string/draw_stroke"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:id="@+id/sw_draw_stroke"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_filtration"
+                app:img_width="20dp"
+                app:text="@string/filter_algorithm"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:id="@+id/sw_filter_algorithm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_hand_code"
+                app:img_width="20dp"
+                app:text="@string/hand_code_value"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:layout_marginLeft="@dimen/dp_8"
+                android:id="@+id/sw_hand_code"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_invalid"
+                app:img_width="20dp"
+                app:text="@string/invalid_code"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:layout_marginLeft="@dimen/dp_10"
+                android:id="@+id/sw_invalid_code"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_invalid"
+                app:img_width="20dp"
+                app:text="@string/big_code_value"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:layout_marginLeft="@dimen/dp_15"
+                android:id="@+id/sw_invalid_code_value"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.sonix.oidbluetooth.view.MyImageTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                app:img_height="20dp"
+                app:img_src="@drawable/selector_invalid"
+                app:img_width="20dp"
+                app:text="@string/practise_calligraphy"
+                app:text_color="@color/selector_textview"
+                app:text_direction="right"
+                app:text_margin="5dp" />
+            <Switch
+                android:layout_marginLeft="@dimen/dp_15"
+                android:id="@+id/sw_practise_calligraphy"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#9AA0A6"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_bit_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_txt"
+            app:img_width="20dp"
+            app:text="@string/bit_error"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/ll_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:img_height="20dp"
+            app:img_src="@drawable/selector_about"
+            app:img_width="20dp"
+            app:text="@string/about"
+            app:text_color="@color/selector_textview"
+            app:text_direction="right"
+            app:text_margin="20dp" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_beiSaiEr"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="贝塞尔" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_lineTo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="lineTo" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_opne_8clockAlgorithm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="打开8点算法" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_close_8clockAlgorithm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="关闭8点算法" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_Migration_close"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="关闭偏移算法" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_Migration_open"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="打开偏移算法" />
+        <!--    Log.e(TAG, "偏移算法-&#45;&#45;&#45;&#45;&#45;&#45;" + isChecked);
+            penCommAgent.setIsSplitMigration(isChecked);-->
+        <!--    <LinearLayout-->
+        <!--        android:id="@+id/ll_recognition"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:orientation="horizontal">-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:src="@drawable/selector_recognition" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:text="@string/bjsb" />-->
+        <!--    </LinearLayout>-->
+
+        <!--    <LinearLayout-->
+        <!--        android:id="@+id/ll_offline"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:orientation="horizontal">-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:src="@drawable/selector_offline" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:text="@string/lxsj" />-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:src="@mipmap/icon_next" />-->
+        <!--    </LinearLayout>-->
+
+        <!--    <LinearLayout-->
+        <!--        android:id="@+id/ll_setting"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:orientation="horizontal">-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:src="@drawable/selector_parameter" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:text="@string/bcs" />-->
+        <!--    </LinearLayout>-->
+
+        <!--    <LinearLayout-->
+        <!--        android:id="@+id/ll_ota"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:orientation="horizontal">-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:src="@drawable/selector_ota" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:text="@string/ota_update" />-->
+        <!--    </LinearLayout>-->
+
+        <!--    <LinearLayout-->
+        <!--        android:id="@+id/ll_txt"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:orientation="horizontal">-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:src="@drawable/selector_txt" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:text="@string/txt" />-->
+        <!--    </LinearLayout>-->
+
+        <!--    <LinearLayout-->
+        <!--        android:id="@+id/ll_about"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:layout_marginBottom="10dp"-->
+        <!--        android:orientation="horizontal">-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="20dp"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:src="@drawable/selector_about" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:text="@string/about" />-->
+        <!--    </LinearLayout>-->
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+

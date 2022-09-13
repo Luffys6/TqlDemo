@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:text="@string/set_pen_sensitivity"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="@string/cancel"
+            android:textColor="#8492A6"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/zlm"
+        android:textColor="#313B46"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.sonix.oidbluetooth.view.SelectorView
+            android:id="@+id/iv_sensitivity_0"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            app:checked="true"
+            app:normal_src="@drawable/bg_selector"
+            app:normal_text_color="#000000"
+            app:selected__src="@drawable/bg_selectored"
+            app:selected_text_color="#FFFFFF"
+            app:selected_text="@string/txt_0"
+            app:selected_view_checked="true"/>
+
+        <com.sonix.oidbluetooth.view.SelectorView
+            android:id="@+id/iv_sensitivity_1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            app:checked="true"
+            app:normal_src="@drawable/bg_selector"
+            app:normal_text_color="#000000"
+            app:selected__src="@drawable/bg_selectored"
+            app:selected_text_color="#FFFFFF"
+            app:selected_text="@string/txt_1"
+            app:selected_view_checked="false"/>
+
+        <com.sonix.oidbluetooth.view.SelectorView
+            android:id="@+id/iv_sensitivity_2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            app:checked="true"
+            app:normal_src="@drawable/bg_selector"
+            app:normal_text_color="#000000"
+            app:selected__src="@drawable/bg_selectored"
+            app:selected_text_color="#FFFFFF"
+            app:selected_text="@string/txt_2" />
+
+        <com.sonix.oidbluetooth.view.SelectorView
+            android:id="@+id/iv_sensitivity_3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            app:checked="true"
+            app:normal_src="@drawable/bg_selector"
+            app:normal_text_color="#000000"
+            app:selected__src="@drawable/bg_selectored"
+            app:selected_text_color="#FFFFFF"
+            app:selected_text="@string/txt_3" />
+
+        <com.sonix.oidbluetooth.view.SelectorView
+            android:id="@+id/iv_sensitivity_4"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            app:checked="true"
+            app:normal_src="@drawable/bg_selector"
+            app:normal_text_color="#000000"
+            app:selected__src="@drawable/bg_selectored"
+            app:selected_text_color="#FFFFFF"
+            app:selected_text="@string/txt_4" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn2"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

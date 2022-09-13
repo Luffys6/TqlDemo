@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <com.sonix.oidbluetooth.view.ZoomView
+        android:id="@+id/myLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#D7D7D7">
+
+        <com.sonix.surfaceview.DrawView
+            android:id="@+id/penview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:background_resources="@drawable/pager_positive"
+            app:resources_dpi="300" />
+
+    </com.sonix.oidbluetooth.view.ZoomView>
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/itv_width"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_width"
+            app:text="@string/width"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom"
+            android:visibility="gone"/>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/itv_submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_width"
+            app:text="提交"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom"
+            android:visibility="gone"/>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/itv_color"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_color"
+            app:text="@string/color"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom"
+            android:visibility="gone"/>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/itv_clear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_clear"
+            app:text="@string/clear"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom"
+            android:visibility="visible"/>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/itv_replay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_replay"
+            app:text="@string/replay"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom"
+            android:visibility="gone"/>
+
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/itv_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_more"
+            app:text="@string/more"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom" />
+    </LinearLayout>
+</LinearLayout>
+

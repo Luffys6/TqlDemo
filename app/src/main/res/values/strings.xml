@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartPen</string>
+
+    <string name="permission_title" translatable="false" />
+    <string name="permission_sdcard_message" translatable="false" />
+    <string name="permission_button" translatable="false" />
+    <string name="permission_location_message" translatable="false" />
+    <string name="permission_bluetooth_message" translatable="false" />
+    <string name="permission_fine_location_message" translatable="false" />
+
+
+    <string name="ota_upgrade_progress_dialog_title">升级中</string>
+
+
+    <string name="button_ok">OK</string>
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+
+    <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
+    <string name="viewfinderview_status_text2">即可自动扫描</string>
+
+
+    <string name="qxljznb">请先连接智能笔...</string>
+    <string name="cancel">取消</string>
+
+    <string name="go_connect">去连接</string>
+    <string name="connect_failed">连接失败</string>
+    <string name="connected">已连接:%s</string>
+    <string name="not_connect_pen">未连接智能笔</string>
+
+    <string name="search_title">连接设备</string>
+    <string name="pen_name">笔名:%s</string>
+    <string name="pen_address">mac:%s</string>
+    <string name="pen_battery">电量剩余:%s</string>
+
+    <string name="change_pen">切换智能笔</string>
+    <string name="bjsb">笔迹识别</string>
+    <string name="lxsj">离线数据</string>
+    <string name="bcs">笔参数</string>
+    <string name="dcrz">导出蓝牙日志</string>
+    <string name="ota_update">OTA升级</string>
+    <string name="about">关于</string>
+    <string name="ok">确定</string>
+    <string name="qcdqysybj">清除当前页所有笔记？</string>
+    <string name="txt">选择TXT</string>
+    <string name="bit_error">误码率检测</string>
+    <string name="start_offline">获取数据</string>
+    <string name="breakpoint_offline">断点续传</string>
+    <string name="stop_offline">停止获取</string>
+    <string name="delete_offline">清除数据</string>
+    <string name="offline_number">离线数据量</string>
+    <string name="offline">离线</string>
+    <string name="smartpen">SmartPen</string>
+    <string name="delete">删除</string>
+    <string name="name">笔名</string>
+    <string name="address">蓝牙地址</string>
+    <string name="pen_boot_version">BOOT版本</string>
+    <string name="bt_version">蓝牙固件版本</string>
+    <string name="mcu_version">MCU固件版本</string>
+    <string name="custom_id">笔的类型</string>
+    <string name="battery">剩余电量</string>
+    <string name="used_memory">已用内存</string>
+    <string name="rtc_time">RTC时间</string>
+    <string name="beep">蜂鸣器</string>
+    <string name="pressure_switch_on">笔尖压力唤醒</string>
+    <string name="led">呼吸灯</string>
+    <string name="auto_close_time">自动关机时间</string>
+    <string name="sensitivity">灵敏度</string>
+    <string name="force_range">压力值范围</string>
+    <string name="element_code">点读码值</string>
+    <string name="save_log">保存日志</string>
+    <string name="save_element_code">保存点读码</string>
+    <string name="draw_stroke">笔锋绘制</string>
+    <string name="filter_algorithm">过滤算法</string>
+    <string name="dqlxsjzl">当前离线数据总量</string>
+    <string name="zdl">知道了</string>
+    <string name="jx">继续</string>
+    <string name="zt">暂停</string>
+    <string name="ztcg">暂停成功</string>
+    <string name="ztsb">暂停失败</string>
+    <string name="ljznbmacbh">连接智能笔MAC编号</string>
+    <string name="ckbwmacbh">查看笔尾MAC编号，连接智能笔</string>
+    <string name="recognition" >手写识别</string>
+
+    <string name="pdz">配对中</string>
+    <string name="ljz">连接中</string>
+    <string name="sbz">识别中</string>
+    <string name="xzsjwj">选择升级文件</string>
+    <string name="retry">重试</string>
+    <string name="myzdznb">没有找到智能笔呢～</string>
+    <string name="search_step1">1.检查智能笔指示灯是否正常显示</string>
+    <string name="search_step2">2.将智能笔与手机保持一米之内</string>
+
+
+    <string name="user_agreement">《用户协议》</string>
+    <string name="privacy_policy">《隐私政策》</string>
+    <string name="company">深圳腾千里科技有限公司版权所有</string>
+    <string name="copyright">Copyright@2020-2025</string>
+    <string name="tygxy">同意该协议</string>
+    <string name="already_read">我已阅读该协议</string>
+    <string name="already_read_privacy">我已阅读该隐私政策</string>
+    <string name="set_pen_name">设置笔名</string>
+    <string name="set_pen_close_time">设置笔自动关机时间</string>
+    <string name="scwczzdgj">时长未操作自动关机</string>
+    <string name="set_pen_sensitivity">设置灵敏度</string>
+    <string name="zlm">（最灵敏）</string>
+    <string name="txt_0">0</string>
+    <string name="txt_1">1</string>
+    <string name="txt_2">2</string>
+    <string name="txt_3">3</string>
+    <string name="txt_4">4</string>
+    <string name="set_rtc_date">设置日期</string>
+    <string name="set_rtc_time">设置时间</string>
+    <string name="offline_delete_success">离线数据删除成功</string>
+    <string name="offline_delete_failed">离线数据删除失败</string>
+    <string name="width">线宽</string>
+    <string name="color">颜色</string>
+    <string name="clear">清除</string>
+    <string name="replay">回放</string>
+    <string name="more">更多</string>
+    <string name="adjust_pen_time">校正RTC时间</string>
+    <string name="Electric_quantity_judgment">警告, 电量低于10%, 获取离线中请勿半途插USB充电</string>
+    <string name="Donot_charge_offline">获取离线中请勿插USB充电</string>
+    <string name="zdl_continue">知道了,继续获取</string>
+    <string name="isDeleteData">" 确定清除所有离线数据？\n无法恢复"</string>
+    <string name="no_data">数据为空,无法回放</string>
+    <string name="no_data_recognition">数据为空,无法识别</string>
+    <string name="flash">内存容量</string>
+    <string name="filter_Migration">偏移算法(仅导入TXT有效)</string>
+    <string name="upgrade_success">升级完成</string>
+    <string name="upgrade_cancelled">取消升级</string>
+    <string name="upgrade_failed">升级失败</string>
+    <string name="mcu_update">MCU升级</string>
+    <string name="Upgrading">升级中...</string>
+    <string name="mcu_bt_update">MCU+蓝牙升级</string>
+    <string name="hand_code">手写码</string>
+    <string name="point_read_code">点读码</string>
+    <string name="clear_code">清除点读码</string>
+    <string name="set_error_bit">设置</string>
+    <string name="clear_error_bit">清除</string>
+    <string name="service_agree">同意</string>
+    <string name="service_no">暂不使用</string>
+    <string name="service_title">用户协议和隐私政策</string>
+    <string name="service_guide">\t\t欢迎您使用SmartPen App,我们非常重视您的隐私和个人信息保护。\n
+        \t\t未经您授权，我们不会收集、使用和共享您的个人信息。在您使用我们的服务前，前充分阅读并理解《用户协议》和《隐私政策》 了解详细信息。如果您同意，请点击“同意”开始接受我们的服务。</string>
+
+    <string name="permissions_tips1">权限申请</string>
+    <string name="permissions_tips2">在设置-应用-SmartPen-权限中开启定位权限，以正常定位功能</string>
+    <string name="permissions_tips3">SmartPen需通过蓝牙扫描连接蓝牙笔\n 为正常使用连接智能笔服务，需向您申请定位权限以及读写手机存储权限</string>
+    <string name="closeLocationTip">若关闭定位服务可能搜索不到智能笔！</string>
+    <string name="openLocationService">请打开定位服务</string>
+    <string name="permissions_tips_save">SmartPen需要向您申请读写手机存储权限.</string>
+    <string name="loading">加载中...</string>
+    <string name="toSet">去设置</string>
+    <string name="buzzer_buzzes">蜂鸣器鸣叫</string>
+    <string name="set_pen_buzzer_buzzes_set">设置蜂鸣器鸣叫</string>
+    <string name="invalid_code">无效码</string>
+    <string name="big_code_value">16*16</string>
+    <string name="practise_calligraphy">练字</string>
+    <string name="bt_update">蓝牙升级</string>
+    <string name="tv_originl_data">原始数据:</string>
+    <string name="pen_formatting">格式化:</string>
+    <string name="hand_code_value">手写码值</string>
+    <string name="currentInvalid">当前上传的是无效码:</string>
+    <string name="start_update">开始升级</string>
+    <string name="stop">停止</string>
+</resources>

@@ -1,0 +1,21 @@
+<resources>
+
+    <color name="statusbar_color">#6AB0FF</color>
+
+    <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <!-- Android standard ICS color -->
+    <color name="result_view">#b0000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#333333</color>
+    <color name="blue">#007AFF</color>
+    <color name="sky_blue">#487DFF</color>
+    <color name="green">#39B54A</color>
+    <color name="blue1">#CCFFFF</color>
+    <color name="gray">#E8E8E8</color>
+    <color name="tip_dialog_default_color">#b1000000</color>
+    <color name="button_bg_gray">#b9bbc1</color>
+    <color name="kprogresshud_default_color2">#40000000</color>
+</resources>

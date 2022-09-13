@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:text="设置计算点数"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="5dp"
+        android:textSize="@dimen/sp_14"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:text="设置触发计算的点数N，表示每N个点计算一次误码率"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:text="误码率=无效码点数/总点数 (%)"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/dialog_bit_error_edit"
+        android:padding="@dimen/dp_10"
+        android:background="@drawable/bg_edit"
+        android:textColor="#000"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:hint="范围0-10000,0表示不限制"
+        android:text="10"
+        android:maxLength="5"
+        android:inputType="number"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="#8492A6"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#E4E4E4" />
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:textColor="#EC6938"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

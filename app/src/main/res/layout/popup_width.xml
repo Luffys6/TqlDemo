@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_go_connect">
+
+    <com.sonix.oidbluetooth.view.SelectorImageView
+        android:id="@+id/iv_width_1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:src="@mipmap/width_1"
+        app:selector_src="@mipmap/width_1_checked" />
+
+
+    <com.sonix.oidbluetooth.view.SelectorImageView
+        android:id="@+id/iv_width_2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:src="@mipmap/width_2"
+        app:selector_src="@mipmap/width_2_checked" />
+
+
+    <com.sonix.oidbluetooth.view.SelectorImageView
+        android:id="@+id/iv_width_3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:src="@mipmap/width_3"
+        app:selector_src="@mipmap/width_3_checked" />
+
+
+    <com.sonix.oidbluetooth.view.SelectorImageView
+        android:id="@+id/iv_width_4"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:src="@mipmap/width_4"
+        app:selector_src="@mipmap/width_4_checked" />
+
+
+    <com.sonix.oidbluetooth.view.SelectorImageView
+        android:id="@+id/iv_width_5"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:src="@mipmap/width_5"
+        app:selector_src="@mipmap/width_5_checked" />
+
+</LinearLayout>
