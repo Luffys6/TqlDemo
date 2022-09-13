@@ -1279,7 +1279,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             //笔锋绘制方法
             if (bIsReplay) {
                 SetPenColor(dot.color);
-                mPenView.processDot(dot);
+                mPenView.processDotNew(dot);
                 gReplayCurrentNumber++;
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
@@ -1313,7 +1313,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             public void run() {
                 Replay(index, penview_dialog);
             }
-        }, 3000);
+        }, 2000);
         evaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

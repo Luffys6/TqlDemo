@@ -329,7 +329,7 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
             float y = DotUtils.joiningTogether(dot.y, dot.fy);
 
 
-            if (PenUtils.penDotType == 18  || PenUtils.penDotType == 19 || PenUtils.penDotType == 51 ) {
+            if (PenUtils.penDotType == 18 || PenUtils.penDotType == 19 || PenUtils.penDotType == 51) {
                 pointX = DotUtils.getPoint(dot.ab_x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
                 pointY = DotUtils.getPoint(dot.ab_y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
             } else {
@@ -359,6 +359,7 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
 //        });
 
     }
+
 
     /**
      * @param pointX  屏幕x轴座标
@@ -395,6 +396,28 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
 //        });
 
     }
+
+
+    public void processDotNew(Dot dot) {
+        float x = DotUtils.joiningTogether(dot.x, dot.fx);
+        float y = DotUtils.joiningTogether(dot.y, dot.fy);
+        pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
+        pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
+        switch (dot.type) {
+            case PEN_DOWN:
+                mPen.onDown(pointX, pointY, dot.force, sCanvas);
+                break;
+            case PEN_MOVE:
+                mPen.onMove(pointX, pointY, dot.force, sCanvas);
+                break;
+            case PEN_UP:
+                mPen.onUp(pointX, pointY, 1, sCanvas);
+                break;
+        }
+
+
+    }
+
 
     /**
      * 获取自身的宽度
