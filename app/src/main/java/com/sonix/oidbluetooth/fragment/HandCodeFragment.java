@@ -77,6 +77,7 @@ import com.sonix.ota.BtMcuActivity;
 import com.sonix.ota.McuActivity;
 import com.sonix.ota.OTAActivity;
 import com.sonix.surfaceview.DrawView;
+import com.sonix.surfaceview.DrawView1;
 import com.sonix.util.ColorUtil;
 import com.sonix.util.DataHolder;
 import com.sonix.util.DotUtils;
@@ -781,7 +782,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             pointY = DotUtils.getPoint(y, mPenView.getBG_HEIGHT(), mPenView.getPAPER_HEIGHT(), DotUtils.getDistPerunit());
         }
 
-//        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
+        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
         isRect((int) pointX, (int) pointY, dot);
         /**
          * start
@@ -1266,21 +1267,19 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void Replay(int index, DrawView mPenView) {
+    private void Replay(int index, DrawView1 mPenView) {
         List<Dot> dots = dot_word.get(index);
         if (dots == null || dots.isEmpty()) {
             bIsReplay = false;
             return;
         }
         bIsReplay = true;
-        gReplayTotalNumber = dots.size();
-        gReplayCurrentNumber = 0;
+
         for (final Dot dot : dots) {
             //笔锋绘制方法
             if (bIsReplay) {
                 SetPenColor(dot.color);
                 mPenView.processDotNew(dot);
-                gReplayCurrentNumber++;
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
                 }
@@ -1305,7 +1304,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         }
         View view = LayoutInflater.from(activity).inflate(R.layout.dialog_replay, null);
 
-        DrawView penview_dialog = view.findViewById(R.id.penview_dialog);
+        DrawView1 penview_dialog = view.findViewById(R.id.penview_dialog);
         TextView evaluate = view.findViewById(R.id.evaluate);
 
         new Handler().postDelayed(new Runnable() {

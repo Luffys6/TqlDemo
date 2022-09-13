@@ -22,6 +22,7 @@ import android.view.View;
 
 import com.sonix.oidbluetooth.R;
 import com.sonix.util.DotUtils;
+import com.sonix.util.LogUtils;
 import com.tqltech.tqlpencomm.Constants;
 import com.tqltech.tqlpencomm.bean.Dot;
 import com.tqltech.tqlpencomm.pen.PenUtils;
@@ -401,6 +402,8 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
     public void processDotNew(Dot dot) {
         float x = DotUtils.joiningTogether(dot.x, dot.fx);
         float y = DotUtils.joiningTogether(dot.y, dot.fy);
+        LogUtils.e("dbj","BG_WIDTH="+BG_WIDTH+",BG_HEIGHT="+BG_HEIGHT);
+        LogUtils.e("dbj","PAPER_WIDTH="+PAPER_WIDTH+",PAPER_HEIGHT="+PAPER_HEIGHT);
         pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
         pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
         switch (dot.type) {
@@ -473,8 +476,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
 
         InputStream is = this.getResources().openRawResource(bgResourceId);
         mBitmap = BitmapFactory.decodeStream(is);
-
-//        mBitmap = BitmapFactory.decodeResource(getResources(), bgResourceId).copy(Bitmap.Config.ARGB_4444, true);
 
         Double[] doubles = DotUtils.calculateBookSize(mBitmap, imageDpi);
         Log.i(TAG, "底图width=" + mBitmap.getWidth() + "//height=" + mBitmap.getHeight() + "换算之后的宽高；" + Arrays.toString(doubles));
