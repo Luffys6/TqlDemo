@@ -629,29 +629,30 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
         }
     };
 
-    public void processDotNew(Dot dot) {
-        float x = DotUtils.joiningTogether(dot.x, dot.fx);
-        float y = DotUtils.joiningTogether(dot.y, dot.fy);
-        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
-        pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
-        pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
-//        pointX = x * BG_WIDTH/182;
-//        pointY = y*BG_HEIGHT/256;
-        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
-
-        switch (dot.type) {
-            case PEN_DOWN:
-                mPen.onDown(pointX, pointY, dot.force, sCanvas);
-                break;
-            case PEN_MOVE:
-                mPen.onMove(pointX, pointY, dot.force, sCanvas);
-                break;
-            case PEN_UP:
-                mPen.onUp(pointX, pointY, 1, sCanvas);
-                break;
-        }
-
-
-    }
+//    public void processDotNew(Dot dot,int a ,int b) {
+//        float x = DotUtils.joiningTogether(dot.x, dot.fx);
+//        float y = DotUtils.joiningTogether(dot.y, dot.fy);
+//        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
+//        pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
+//        pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
+////        pointX = x * BG_WIDTH/182;
+////        pointY = y*BG_HEIGHT/256;
+//        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
+//        pointY = (pointY -b)*2;
+//        pointX = (pointX -a)*2;
+//        switch (dot.type) {
+//            case PEN_DOWN:
+//                mPen.onDown(pointX, pointY, dot.force, sCanvas);
+//                break;
+//            case PEN_MOVE:
+//                mPen.onMove(pointX, pointY, dot.force, sCanvas);
+//                break;
+//            case PEN_UP:
+//                mPen.onUp(pointX, pointY, 1, sCanvas);
+//                break;
+//        }
+//
+//
+//    }
 
 }

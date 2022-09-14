@@ -104,6 +104,13 @@ public class PaperBean {
             private Integer ax;
             private Integer ay;
 
+            public PosListDTO(Integer x, Integer y, Integer ax, Integer ay) {
+                this.x = x;
+                this.y = y;
+                this.ax = ax;
+                this.ay = ay;
+            }
+
             public Integer getX() {
                 return x;
             }

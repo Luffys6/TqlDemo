@@ -56,5 +56,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-
+    <style name="first_popwindow_anim_style" mce_bogus="1" parent="android:Animation" >
+        <item name="android:windowEnterAnimation">@anim/dialog_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_hidden_anim</item>
+    </style>
 </resources>

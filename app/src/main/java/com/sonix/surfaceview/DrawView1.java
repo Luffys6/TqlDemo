@@ -21,6 +21,7 @@ import android.view.View;
 import com.sonix.oidbluetooth.R;
 import com.sonix.util.DotUtils;
 import com.sonix.util.LogUtils;
+import com.sonix.util.ThreadManager;
 import com.tqltech.tqlpencomm.bean.Dot;
 import com.tqltech.tqlpencomm.pen.PenUtils;
 
@@ -36,8 +37,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     private static final String TAG = "DrawView";
     private Context mContext;
     private SurfaceHolder mHolder;
-    private Thread mThread;
-    /**
+     /**
      * 线程运行的标识，用于控制线程
      */
     private boolean mIsDrawing;
@@ -97,7 +97,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         //底图dpi
         imageDpi = typedArray.getInt(R.styleable.DrawView_resources_dpi, 300);
         //底图背景资源
-        mBgResourceId = typedArray.getResourceId(R.styleable.DrawView_background_resources, R.drawable.pager_positive);
+        mBgResourceId = typedArray.getResourceId(R.styleable.DrawView_background_resources, R.drawable.tzg);
         //生成背景图片
         setBgBitmap(mBgResourceId, imageDpi);
         init(context);
@@ -114,15 +114,15 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     }
 
     private void initSurface() {
-        setZOrderMediaOverlay(true);
+//        setZOrderMediaOverlay(true);
         // setWillNotDraw(false);
         mHolder = getHolder();
         //添加回调
         mHolder.addCallback(this);
         //背景黑色变透明
         mHolder.setFormat(PixelFormat.TRANSPARENT);
-        this.setFocusable(true);
-        this.setFocusableInTouchMode(true);
+//        this.setFocusable(true);
+//        this.setFocusableInTouchMode(true);
     }
 
 
@@ -185,8 +185,10 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         //Log.i(TAG, "surfaceCreated: ");
         //创建线程
         mIsDrawing = true;
-        mThread = new Thread(this);
-        mThread.start();
+//        mThread = new Thread(this);
+        ThreadManager.getThreadPool().exeute(new Thread(this));
+
+//        mThread.start();
 
     }
 
@@ -203,20 +205,21 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         if (BG_WIDTH > 0) {
             bgWrite = Bitmap.createScaledBitmap(mBitmap, BG_WIDTH, BG_HEIGHT, true);
         }
-        canvasMatrix = new Matrix();//初始化
-        initCanvas(bgWrite);
+         initCanvas(bgWrite);
 
     }
 
-    public void processDotNew(Dot dot) {
+    public void processDotNew(Dot dot,int a ,int b) {
         float x = DotUtils.joiningTogether(dot.x, dot.fx);
         float y = DotUtils.joiningTogether(dot.y, dot.fy);
-        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
-        pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
-        pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
-        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
-//        pointY = pointY -152;
-//        pointX = pointX -102;
+//        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
+        pointX = DotUtils.getPoint(x, 1080, 182.03333059946698, DotUtils.getDistPerunit());
+        pointY = DotUtils.getPoint(y, 1519, 256.03199615478513, DotUtils.getDistPerunit());
+//        pointX = x * BG_WIDTH/182;
+//        pointY = y*BG_HEIGHT/256;
+        pointY = (pointY -b)*2;
+        pointX = (pointX -a)*2;
+//        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
         switch (dot.type) {
             case PEN_DOWN:
                 mPen.onDown(pointX, pointY, dot.force, sCanvas);
@@ -324,71 +327,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     public void setPenWidth(float penWidth) {
         mPen.setPenWidth(penWidth);
     }
-
-    /**
-     * 根据像素密度动态计算笔迹宽度
-     *
-     * @param width
-     * @return
-     */
-    private float transformWidth(float width) {
-        float density = mContext.getResources().getDisplayMetrics().density;
-        //Log.i(TAG, "transformWidth: width=" + width + "///density=" + density);
-        return width * density * 0.5f;
-    }
-
-
-    /**
-     * 设置笔的类型
-     *
-     * @param penMode
-     */
-    public void setPenMode(int penMode) {
-        currentPenMode = penMode;
-        if (penMode == TYPE_STROKE_PEN) {
-            //初始化笔锋类
-            if (mPen == null || !(mPen instanceof StrokePen)) {
-                mPen = new StrokePen(mContext);
-            }
-        } else if (penMode == TYPE_NORMAL_PEN) {
-            //初始化无笔锋类
-            if (mPen == null || !(mPen instanceof NormalPen)) {
-                mPen = new NormalPen(mContext);
-            }
-            //((NormalPen) mPen).switchHandWrite();
-        } else if (penMode == TYPE_DOODLE_PEN) {
-            //初始化涂鸦类
-            if (mPen == null || !(mPen instanceof NormalPen)) {
-                mPen = new NormalPen(mContext);
-            }
-            ((NormalPen) mPen).switchDoodle();
-        }
-    }
-
-    /**
-     * 反撤销笔迹
-     */
-    public void redo() {
-        if (currentPenMode == TYPE_DOODLE_PEN) {
-            if (mPen instanceof NormalPen) {
-                NormalPen doodlePen = (NormalPen) mPen;
-                doodlePen.redo();
-            }
-        }
-    }
-
-    /**
-     * 撤销笔迹
-     */
-    public void undo() {
-        if (currentPenMode == TYPE_DOODLE_PEN) {
-            if (mPen instanceof NormalPen) {
-                NormalPen doodlePen = (NormalPen) mPen;
-                doodlePen.undo();
-            }
-        }
-    }
-
 
     @Override
     public void run() {

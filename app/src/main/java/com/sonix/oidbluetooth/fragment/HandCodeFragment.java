@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,10 +32,12 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -87,6 +90,7 @@ import com.sonix.util.FileUtils;
 import com.sonix.util.LogUtils;
 import com.sonix.util.SPUtils;
 
+import com.sonix.util.ThreadManager;
 import com.tqltech.tqlpencomm.PenCommAgent;
 import com.tqltech.tqlpencomm.bean.Dot;
 import com.tqltech.tqlpencomm.listener.ExportLogListener;
@@ -330,8 +334,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        showReplayDialog(finalI);
-                        Replay(finalI, mPenView);
+                        showReplayDialog(finalI);
                     }
                 });
                 view.setLayoutParams(layoutParams);
@@ -786,7 +789,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             pointY = DotUtils.getPoint(y, mPenView.getBG_HEIGHT(), mPenView.getPAPER_HEIGHT(), DotUtils.getDistPerunit());
         }
 
-        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
+//        LogUtils.e("dbj111", "物理尺寸 :" + pointX + ",,pointY" + pointY + ",PenUtils.penDotType:" + PenUtils.penDotType);
         isRect((int) pointX, (int) pointY, dot);
         /**
          * start
@@ -1271,7 +1274,9 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void Replay(int index, DrawView mPenView) {
+    private void Replay(int index, DrawView1 mPenView) {
+        int x = posListBeans.get(index).getX();
+        int y = posListBeans.get(index).getY();
         List<Dot> dots = dot_word.get(index);
         if (dots == null || dots.isEmpty()) {
             bIsReplay = false;
@@ -1282,9 +1287,10 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         for (final Dot dot : dots) {
             //笔锋绘制方法
             if (bIsReplay) {
-//                SetPenColor(dot.color);
-                setPenColor(1);
-                mPenView.processDotNew(dot);
+                LogUtils.e("dbjddd","111111111");
+                SetPenColor(dot.color);
+//                mPenView.setPenColor(1);
+                mPenView.processDotNew(dot, x, y);
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
                 }
@@ -1300,44 +1306,84 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    /**
-     *
-     */
+
     private void showReplayDialog(int index) {
-        if (dialog == null) {
-            dialog = new Dialog(activity, R.style.customDialog);
-        }
-        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_replay, null);
 
-        DrawView1 penview_dialog = view.findViewById(R.id.penview_dialog);
-        TextView evaluate = view.findViewById(R.id.evaluate);
-
+        View pop = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_replay, null);
+        final DrawView1 penview_dialog = pop.findViewById(R.id.penview_dialog);
+        penview_dialog.reset();
+        TextView evaluate = pop.findViewById(R.id.evaluate);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Replay(index, mPenView);
+                ThreadManager.getThreadPool().exeute(new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Replay(index, penview_dialog);
+                    }
+                }));
             }
-        }, 2000);
-        evaluate.setOnClickListener(new View.OnClickListener() {
+        }, 1000);
+        PopupWindow popupWindow = new PopupWindow(pop, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(false);
+        View parent = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_hand, null);
+        popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+        //popupWindow在弹窗的时候背景半透明
+        final WindowManager.LayoutParams params = activity.getWindow().getAttributes();
+        params.alpha = 0.5f;
+        activity.getWindow().setAttributes(params);
+//        popupWindow.setAnimationStyle(R.style.first_popwindow_anim_style);
+        pop.findViewById(R.id.close).setOnClickListener(v -> {
+            LogUtils.e("dbj111","66666666");
+            bIsReplay = false;
+            penview_dialog.destroyDrawingCache();
+            params.alpha = 1.0f;
+            popupWindow.dismiss();
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
-            public void onClick(View view) {
-//                if (mPenView != null) {
-//                    mPenView.reset();
-//                }
-//                if (!bIsReplay) {
-//                    dot_number.clear();
-//                }
-                dialog.dismiss();
+            public void onDismiss() {
+                params.alpha = 1.0f;
+                activity.getWindow().setAttributes(params);
             }
         });
-
-        dialog.setContentView(view);
-
-
-        dialog.show();
     }
 
-
+    /**
+     *
+     */
+//    private void showReplayDialog(int index) {
+//        if (dialog == null) {
+//            dialog = new Dialog(activity, R.style.customDialog);
+//        }
+//        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_replay, null);
+//
+//        DrawView1 penview_dialog = view.findViewById(R.id.penview_dialog);
+//        TextView evaluate = view.findViewById(R.id.evaluate);
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Replay(index, penview_dialog);
+//            }
+//        }, 2000);
+//        evaluate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                if (mPenView != null) {
+////                    mPenView.reset();
+////                }
+////                if (!bIsReplay) {
+////                    dot_number.clear();
+////                }
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        dialog.setContentView(view);
+//        dialog.show();
+//    }
     public void clearPenView() {
         PenData.firstDot = false;
         if (mPenView != null) {

@@ -4,8 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="24dp"
     android:layout_marginRight="24dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+     android:background="@color/white"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
     android:orientation="vertical">
@@ -19,20 +18,27 @@
         android:gravity="center"
         android:text="当前笔画得分"
         android:textColor="#000000"
-        android:background="@mipmap/red"
         android:textSize="18sp" />
 
     <com.sonix.surfaceview.DrawView1
         android:id="@+id/penview_dialog"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        app:resources_dpi="300" />
+        android:layout_width="98dp"
+        android:layout_height="90dp"
+        />
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@color/possible_result_points"/>
 
+<Button
+    android:id="@+id/close"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:text="关闭"
+    android:layout_marginTop="16dp"
+    android:background="@color/blue"
+    android:textColor="@color/white"
 
+    />
 </LinearLayout>
