@@ -5,23 +5,26 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <com.sonix.oidbluetooth.view.ZoomView
-        android:id="@+id/myLayout"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#D7D7D7">
+        android:background="@color/white">
 
-        <com.sonix.surfaceview.DrawView
-            android:id="@+id/penview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:background_resources="@drawable/pager_positive"
-            app:resources_dpi="300" />
+        <com.sonix.oidbluetooth.view.ZoomView
+            android:id="@+id/myLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </com.sonix.oidbluetooth.view.ZoomView>
+            <com.sonix.surfaceview.DrawView
+                android:id="@+id/penview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:resources_dpi="300" />
 
+        </com.sonix.oidbluetooth.view.ZoomView>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/ll_bottom"
@@ -36,11 +39,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             app:img_src="@drawable/selector_width"
             app:text="@string/width"
             app:text_color="@color/selector_textview"
-            app:text_direction="bottom"
-            android:visibility="gone"/>
+            app:text_direction="bottom" />
 
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_submit"
@@ -48,11 +51,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             app:img_src="@drawable/selector_width"
             app:text="提交"
             app:text_color="@color/selector_textview"
-            app:text_direction="bottom"
-            android:visibility="gone"/>
+            app:text_direction="bottom" />
 
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_color"
@@ -60,11 +63,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             app:img_src="@drawable/selector_color"
             app:text="@string/color"
             app:text_color="@color/selector_textview"
-            app:text_direction="bottom"
-            android:visibility="gone"/>
+            app:text_direction="bottom" />
 
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_clear"
@@ -72,11 +75,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="visible"
             app:img_src="@drawable/selector_clear"
             app:text="@string/clear"
             app:text_color="@color/selector_textview"
-            app:text_direction="bottom"
-            android:visibility="visible"/>
+            app:text_direction="bottom" />
 
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_replay"
@@ -84,11 +87,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             app:img_src="@drawable/selector_replay"
             app:text="@string/replay"
             app:text_color="@color/selector_textview"
-            app:text_direction="bottom"
-            android:visibility="gone"/>
+            app:text_direction="bottom" />
 
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_more"

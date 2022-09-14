@@ -215,6 +215,8 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
         pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
         LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
+//        pointY = pointY -152;
+//        pointX = pointX -102;
         switch (dot.type) {
             case PEN_DOWN:
                 mPen.onDown(pointX, pointY, dot.force, sCanvas);
@@ -248,8 +250,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         PAPER_WIDTH = doubles[0];
         PAPER_HEIGHT = doubles[1];
         Log.i(TAG, "setBgBitmap: PAPER_WIDTH=" + PAPER_WIDTH + "//PAPER_HEIGHT=" + PAPER_HEIGHT + ",imageDpi:" + imageDpi);
-
-
         try {
             is.close();
         } catch (IOException e) {

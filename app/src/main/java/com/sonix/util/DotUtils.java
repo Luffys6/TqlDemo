@@ -77,7 +77,8 @@ public class DotUtils {
      * @return
      */
 
-    public static float getPoint(float dotPoint, int bgSize, double pageSize, double dotSpecification) {
+    public static float
+    getPoint(float dotPoint, int bgSize, double pageSize, double dotSpecification) {
 //        LogUtils.e("dbj","dotPoint="+dotPoint);
 //        LogUtils.e("dbj","bgSize="+bgSize);
 //        LogUtils.e("dbj","pageSize="+pageSize);

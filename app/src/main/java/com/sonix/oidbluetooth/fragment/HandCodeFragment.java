@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
@@ -212,6 +213,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().getWindow().setFormat(PixelFormat.TRANSLUCENT);
+
         View view = inflater.inflate(R.layout.fragment_hand, container, false);
 
         mPenView = view.findViewById(R.id.penview);
@@ -327,7 +330,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showReplayDialog(finalI);
+//                        showReplayDialog(finalI);
+                        Replay(finalI, mPenView);
                     }
                 });
                 view.setLayoutParams(layoutParams);
@@ -617,12 +621,12 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         if ((dot.OwnerID == 201 && dot.BookID == 63) || dot.BookID == 168 || dot.BookID == 0) {
             if (activity.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
 //                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                mPenView.setRotateView(true);
+
             }
         } else {
             if (activity.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
 //                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                mPenView.setRotateView(true);
+
             }
         }
         processDots(dot);
@@ -733,7 +737,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         saveData(dot, gColor, gWidth);
         if ((PageID != gCurPageID || BookID != gCurBookID) && dot.type == Dot.DotType.PEN_DOWN) {
 
-            mPenView.setLastBookId();//记录上一个booid
+
             mPenView.setNoteParameter(BookID, PageID);
 
             setBackgroundImage(dot.SectionID, dot.OwnerID, BookID, PageID);
@@ -1267,7 +1271,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void Replay(int index, DrawView1 mPenView) {
+    private void Replay(int index, DrawView mPenView) {
         List<Dot> dots = dot_word.get(index);
         if (dots == null || dots.isEmpty()) {
             bIsReplay = false;
@@ -1278,7 +1282,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         for (final Dot dot : dots) {
             //笔锋绘制方法
             if (bIsReplay) {
-                SetPenColor(dot.color);
+//                SetPenColor(dot.color);
+                setPenColor(1);
                 mPenView.processDotNew(dot);
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
@@ -1310,7 +1315,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Replay(index, penview_dialog);
+                Replay(index, mPenView);
             }
         }, 2000);
         evaluate.setOnClickListener(new View.OnClickListener() {

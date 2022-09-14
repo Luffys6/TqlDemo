@@ -49,6 +49,7 @@ public class ZoomView extends FrameLayout implements View.OnTouchListener {
     
     private void init() {
         setIsCanTouch(true);
+        setInitScale();
     }
 
     public void setIsCanTouch(boolean canTouch) {
@@ -119,7 +120,8 @@ public class ZoomView extends FrameLayout implements View.OnTouchListener {
         float setPivotY = 0;
         setPivotX = getPivotX() + lessX;
         setPivotY = getPivotY() + lessY;
-
+//        Log.e("lawwingLog", "setPivotX:" + setPivotX + "  setPivotY:" + setPivotY
+//                + "  getWidth:" + getWidth() + "  getHeight:" + getHeight());
         if (setPivotX < 0 && setPivotY < 0) {
             setPivotX = 0;
             setPivotY = 0;
@@ -179,6 +181,7 @@ public class ZoomView extends FrameLayout implements View.OnTouchListener {
     public void setScale(float scale) {
         setScaleX(scale);
         setScaleY(scale);
+
     }
 
     /**
