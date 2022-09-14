@@ -165,7 +165,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
             mOnSizeChangeListener.onSizeChanged(w, h, oldw, oldh);//切换后的Down点等待绘制
             mOnSizeChangeListener = null;
         }
-//        Log.i(TAG, "  / ID /  setBgBitmap 切换大小图层彻底结束  "  );
     }
 
 
