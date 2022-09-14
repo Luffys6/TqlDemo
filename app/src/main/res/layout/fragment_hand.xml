@@ -51,9 +51,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:visibility="gone"
+            android:visibility="visible"
             app:img_src="@drawable/selector_width"
-            app:text="提交"
+            app:text="进去"
             app:text_color="@color/selector_textview"
             app:text_direction="bottom" />
 

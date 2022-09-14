@@ -133,6 +133,11 @@
         <activity
             android:name="com.sonix.ota.BtMcuActivity"
             android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.sonix.oidbluetooth.StrokeOrderActivity"
+            android:screenOrientation="portrait" />
         <!--        <activity android:name=".MainActivity"
                     android:configChanges="orientation|screenSize"
                     android:launchMode="singleInstance"

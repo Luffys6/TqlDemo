@@ -68,6 +68,7 @@ import com.sonix.oidbluetooth.ParameterActivity;
 import com.sonix.oidbluetooth.R;
 import com.sonix.oidbluetooth.RecognitionActivity;
 import com.sonix.oidbluetooth.SearchActivity;
+import com.sonix.oidbluetooth.StrokeOrderActivity;
 import com.sonix.oidbluetooth.view.PopupCheckListener;
 import com.sonix.oidbluetooth.view.PopupColor;
 import com.sonix.oidbluetooth.view.PopupListener;
@@ -480,7 +481,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 showMorePopup();
                 break;
             case R.id.itv_submit:
-                onSave();
+              startActivity(new Intent(getActivity(), StrokeOrderActivity.class));
                 break;
             default:
                 break;
