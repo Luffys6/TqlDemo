@@ -83,9 +83,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     private Matrix canvasMatrix = new Matrix();
 
 
-
-
-
     public DrawView1(Context context) {
         this(context, null);
     }
@@ -106,7 +103,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         init(context);
 
     }
-
 
 
     private void init(Context context) {
@@ -165,13 +161,12 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
 
         initCanvas(bgWrite);
 
-         if (mOnSizeChangeListener != null) {
+        if (mOnSizeChangeListener != null) {
             mOnSizeChangeListener.onSizeChanged(w, h, oldw, oldh);//切换后的Down点等待绘制
             mOnSizeChangeListener = null;
         }
 //        Log.i(TAG, "  / ID /  setBgBitmap 切换大小图层彻底结束  "  );
     }
-
 
 
     public OnSizeChangeListener mOnSizeChangeListener;
@@ -217,10 +212,10 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     public void processDotNew(Dot dot) {
         float x = DotUtils.joiningTogether(dot.x, dot.fx);
         float y = DotUtils.joiningTogether(dot.y, dot.fy);
-        LogUtils.e("dbj","BG_WIDTH="+BG_WIDTH+",BG_HEIGHT="+BG_HEIGHT);
+        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
         pointX = DotUtils.getPoint(x, BG_WIDTH, PAPER_WIDTH, DotUtils.getDistPerunit());
         pointY = DotUtils.getPoint(y, BG_HEIGHT, PAPER_HEIGHT, DotUtils.getDistPerunit());
-        LogUtils.e("dbj","pointX="+pointX+",pointY="+pointY);
+        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
         switch (dot.type) {
             case PEN_DOWN:
                 mPen.onDown(pointX, pointY, dot.force, sCanvas);
@@ -245,7 +240,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     private void setBgBitmap(int bgResourceId, int imageDpi) {
 
 
-         InputStream is = this.getResources().openRawResource(bgResourceId);
+        InputStream is = this.getResources().openRawResource(bgResourceId);
         mBitmap = BitmapFactory.decodeStream(is);
 
 
@@ -254,7 +249,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         PAPER_WIDTH = doubles[0];
         PAPER_HEIGHT = doubles[1];
         Log.i(TAG, "setBgBitmap: PAPER_WIDTH=" + PAPER_WIDTH + "//PAPER_HEIGHT=" + PAPER_HEIGHT + ",imageDpi:" + imageDpi);
-
 
 
         try {
@@ -266,11 +260,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     }
 
 
-
-
-
-
-
     private void initCanvas(Bitmap bitmap) {
         if (sCanvas == null) {
             sCanvas = new Canvas();
@@ -279,7 +268,6 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         sCanvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         sCanvas.setBitmap(bitmap);
     }
-
 
 
     /**
@@ -363,19 +351,19 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
             if (mPen == null || !(mPen instanceof StrokePen)) {
                 mPen = new StrokePen(mContext);
             }
-         } else if (penMode == TYPE_NORMAL_PEN) {
+        } else if (penMode == TYPE_NORMAL_PEN) {
             //初始化无笔锋类
             if (mPen == null || !(mPen instanceof NormalPen)) {
                 mPen = new NormalPen(mContext);
             }
             //((NormalPen) mPen).switchHandWrite();
-         } else if (penMode == TYPE_DOODLE_PEN) {
+        } else if (penMode == TYPE_DOODLE_PEN) {
             //初始化涂鸦类
             if (mPen == null || !(mPen instanceof NormalPen)) {
                 mPen = new NormalPen(mContext);
             }
             ((NormalPen) mPen).switchDoodle();
-         }
+        }
     }
 
     /**

@@ -1316,12 +1316,12 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         evaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mPenView != null) {
-                    mPenView.reset();
-                }
-                if (!bIsReplay) {
-                    dot_number.clear();
-                }
+//                if (mPenView != null) {
+//                    mPenView.reset();
+//                }
+//                if (!bIsReplay) {
+//                    dot_number.clear();
+//                }
                 dialog.dismiss();
             }
         });
