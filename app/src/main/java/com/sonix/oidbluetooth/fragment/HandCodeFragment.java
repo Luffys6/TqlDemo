@@ -77,6 +77,7 @@ import com.sonix.oidbluetooth.view.PopupOffline;
 import com.sonix.oidbluetooth.view.PopupOfflineProgress;
 import com.sonix.oidbluetooth.view.PopupReplay;
 import com.sonix.oidbluetooth.view.PopupWidth;
+import com.sonix.oidbluetooth.view.StrokeOrderView;
 import com.sonix.oidbluetooth.view.ZoomView;
 import com.sonix.ota.BtMcuActivity;
 import com.sonix.ota.McuActivity;
@@ -89,6 +90,7 @@ import com.sonix.util.DotUtils;
 import com.sonix.util.Events;
 import com.sonix.util.FileUtils;
 import com.sonix.util.LogUtils;
+import com.sonix.util.ParserUtilKt;
 import com.sonix.util.SPUtils;
 
 import com.sonix.util.ThreadManager;
@@ -106,7 +108,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -481,7 +485,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 showMorePopup();
                 break;
             case R.id.itv_submit:
-              startActivity(new Intent(getActivity(), StrokeOrderActivity.class));
+                startActivity(new Intent(getActivity(), StrokeOrderActivity.class));
                 break;
             default:
                 break;
@@ -1288,14 +1292,15 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         for (final Dot dot : dots) {
             //笔锋绘制方法
             if (bIsReplay) {
-                LogUtils.e("dbjddd","111111111");
                 SetPenColor(dot.color);
 //                mPenView.setPenColor(1);
                 mPenView.processDotNew(dot, x, y);
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
                 }
+                LogUtils.e("gSpeed",(6 - gSpeed) * 10+"");
                 SystemClock.sleep((6 - gSpeed) * 10);
+
 //                mHandle.sendEmptyMessage(MSG_REPLAY);
             }
         }
@@ -1314,18 +1319,12 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         final DrawView1 penview_dialog = pop.findViewById(R.id.penview_dialog);
         penview_dialog.reset();
         TextView evaluate = pop.findViewById(R.id.evaluate);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ThreadManager.getThreadPool().exeute(new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Replay(index, penview_dialog);
-                    }
-                }));
-            }
-        }, 1000);
+        StrokeOrderView strokeOrderView = pop.findViewById(R.id.stroke_order_view);
+        String svgSix = getFromAssets("data/乖.json");
+        strokeOrderView.setStrokesBySvg(svgSix);
+        new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> Replay(index, penview_dialog))), 1000);
         PopupWindow popupWindow = new PopupWindow(pop, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //        popupWindow.setAnimationStyle(R.style.first_popwindow_anim_style);
         popupWindow.setOutsideTouchable(false);
         popupWindow.setFocusable(false);
         View parent = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_hand, null);
@@ -1334,9 +1333,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         final WindowManager.LayoutParams params = activity.getWindow().getAttributes();
         params.alpha = 0.5f;
         activity.getWindow().setAttributes(params);
-//        popupWindow.setAnimationStyle(R.style.first_popwindow_anim_style);
         pop.findViewById(R.id.close).setOnClickListener(v -> {
-            LogUtils.e("dbj111","66666666");
             bIsReplay = false;
             penview_dialog.destroyDrawingCache();
             params.alpha = 1.0f;
@@ -2268,6 +2265,26 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    /*
+     * 获取html文件
+     */
+    public String getFromAssets(String fileName) {
+        try {
+            InputStreamReader inputReader = new InputStreamReader(
+                    getResources().getAssets().open(fileName));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line = "";
+            String Result = "";
+            while ((line = bufReader.readLine()) != null)
+                Result += line;
+            return Result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
 //    @Override
 //    public void ReceiveDot(Events.ReceiveDot receiveDot) {

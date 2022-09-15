@@ -32,9 +32,7 @@ class StrokeOrderActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_load_svg_six).setOnClickListener {
             val name = "六.json" // 需要将 svg.json 放在 assets 或特定路径下
             svgSix = loadSvgFromAssets(name)
-
             svgSix?.let {
-
                 strokeOrderView1.setStrokesBySvg(it)
             }
         }

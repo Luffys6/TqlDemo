@@ -218,7 +218,7 @@ class StrokeOrderView : View {
                 sleepAnimation()
                 postInvalidate()
             }
-            animator.duration = 750
+            animator.duration = 1500
             animators.add(animator)
         }
         set.playSequentially(animators)
@@ -227,7 +227,7 @@ class StrokeOrderView : View {
 
     private fun sleepAnimation() {
         try {
-            Thread.sleep(15)
+            Thread.sleep(50)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
