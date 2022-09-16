@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -40,6 +42,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +52,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -69,6 +73,9 @@ import com.sonix.oidbluetooth.R;
 import com.sonix.oidbluetooth.RecognitionActivity;
 import com.sonix.oidbluetooth.SearchActivity;
 import com.sonix.oidbluetooth.StrokeOrderActivity;
+import com.sonix.oidbluetooth.bean.CalligraphyResult;
+import com.sonix.oidbluetooth.bean.JudgeBean;
+import com.sonix.oidbluetooth.view.MyView;
 import com.sonix.oidbluetooth.view.PopupCheckListener;
 import com.sonix.oidbluetooth.view.PopupColor;
 import com.sonix.oidbluetooth.view.PopupListener;
@@ -159,7 +166,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
 
     private boolean startOffline;                               //开始下载离线标记
     private boolean showProgress;                               //显示离线下载进度标记
-    private boolean bIsReplay;                                  //回放标记
+    private boolean bIsReplay = false;                                  //回放标记
     private boolean endOffline;                                 //结束下载离线标记
 
     private int gReplayTotalNumber = 0;                         //回放数据总量
@@ -217,7 +224,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     private ZoomView myLayout;
     private List<PaperBean.DataDTO.PosListDTO> posListBeans;
     private int widths, heights;
-
 
     @Nullable
     @Override
@@ -312,7 +318,11 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 myLayout.addView(view);
 
                 ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
+//                ViewGroup.MarginLayoutParams margin1 = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
+
+//                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(margin1);
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin);
+
 //                float xRatio1 = (float) width / (float) widths;
 //                float yRatio1 = (float) height / (float) heights;
 //                    thanH = yRatio1;
@@ -334,14 +344,27 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 layoutParams.height = h;
                 layoutParams.leftMargin = left;
                 layoutParams.topMargin = top;
+
+//                params.width = 1000;
+//                params.height = 600;
+//                params.leftMargin = left;
+//                params.topMargin = top-20;
+
                 view.setBackgroundResource(R.drawable.shape_black_border);
                 int finalI = i1;
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showReplayDialog(finalI);
+//                        showReplayDialog(finalI);
+                        if (pointsBeans != null && pointsBeans.size() > 0) {
+                            onSave();
+                            showReplayDialog(finalI, 1);
+                        } else {
+                            GetResult(finalI);
+                        }
                     }
                 });
+//                view.getChildAt(1).setLayoutParams(layoutParams);
                 view.setLayoutParams(layoutParams);
             }
         });
@@ -853,13 +876,41 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             @Override
             protected void onSuccess(Call call, Response response, String s) {
                 Gson gson = new Gson();
-                LogUtils.e("dbj", s);
-//                pointsBean = null;
-//                JudgeBean judgeBean = gson.fromJson(s,JudgeBean.class);
-//                if (judgeBean.getResponse().equals("ok")){
-//                    showShortToast("数据提交成功");
-//
-//                }
+                JudgeBean judgeBean = gson.fromJson(s, JudgeBean.class);
+                if (judgeBean.getResponse().equals("ok")) {
+                    showToast("打分成功，再次点击查看结果");
+                    dot_word.get(index).clear();
+                }
+            }
+
+            @Override
+            protected void onError(Call call, int statusCode, Exception e) {
+                showToast("网络不可用，请检查网络");
+            }
+        }, params);
+//        String FILE_ROOT = Environment.getExternalStorageDirectory() + "/asd/";//根目录
+//        FileUtils.writeTxtToFile(pos, FILE_ROOT, "dian.txt");
+//        SavePos(pos);
+    }
+
+    private CalligraphyResult calligraphyResult;
+
+    public void GetResult(int index) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("index_pos", index + "");
+        LogUtils.e("dbjindex", index + "");
+        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.162:8031/tea/get_word_result/", new LoadCallBack<String>(getActivity(), false) {
+            @Override
+            protected void onSuccess(Call call, Response response, String s) {
+                Gson gson = new Gson();
+                calligraphyResult = gson.fromJson(s, CalligraphyResult.class);
+                if (calligraphyResult.getResponse().equals("ok")) {
+                    showReplayDialog(index, 0);
+
+                } else {
+                    showReplayDialog(index, 1);
+                }
             }
 
             @Override
@@ -868,9 +919,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 showToast("网络不可用，请检查网络");
             }
         }, params);
-//        String FILE_ROOT = Environment.getExternalStorageDirectory() + "/asd/";//根目录
-//        FileUtils.writeTxtToFile(pos, FILE_ROOT, "dian.txt");
-//        SavePos(pos);
+
     }
 
     private void showHandCode(Dot dot) {
@@ -1267,6 +1316,9 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 if (!bIsReplay) {
                     dot_number.clear();
                 }
+                if (pointsBeans != null) {
+                    pointsBeans.clear();
+                }
                 dialog.dismiss();
             }
         });
@@ -1276,6 +1328,75 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         dialog.setCanceledOnTouchOutside(false);
 
         dialog.show();
+    }
+
+
+    private void ReplayNet(int index, DrawView1 mPenView) {
+        int x = posListBeans.get(index).getX();
+        int y = posListBeans.get(index).getY();
+        List<CalligraphyResult.DataDTO.PosListDTO> dots = calligraphyResult.getData().getPos_list();
+        if (dots == null || dots.isEmpty()) {
+            bIsReplay = false;
+            return;
+        }
+        for (int i = 0; i < dots.size(); i++) {
+            bIsReplay = true;
+            List<CalligraphyResult.DataDTO.PosListDTO.MovePointDTO> points = dots.get(i).getMovePoint();
+            if (bIsReplay) {
+                int type = 0;
+                for (int i1 = 0; i1 < points.size(); i1++) {
+//                    mPenView.setPenColor(1);
+                    if (i1 == 0) {
+                        type = 0;
+                    } else if (i1 == points.size() - 1) {
+                        type = 2;
+                    } else {
+                        type = 1;
+                    }
+                    mPenView.processDotNewNet(points.get(i1), x, y, type);
+                    SystemClock.sleep(30);
+//                mHandle.sendEmptyMessage(MSG_REPLAY);
+                }
+            }
+        }
+        bIsReplay = false;
+    }
+
+
+    private void ReplayNet1(int index, DrawView1 mPenView, int a) {
+         int x = posListBeans.get(index).getX();
+        int y = posListBeans.get(index).getY();
+        List<CalligraphyResult.DataDTO.PosListDTO> dots = calligraphyResult.getData().getPos_list();
+        if (dots == null || dots.isEmpty()) {
+            bIsReplay = false;
+            return;
+        }
+        bIsReplay = true;
+        if (a>dots.size()){
+            bIsReplay = false;
+            return;
+        }
+        a = a -1;
+        LogUtils.e("dbjaa",a+"");
+        List<CalligraphyResult.DataDTO.PosListDTO.MovePointDTO> points = dots.get(a).getMovePoint();
+        if (bIsReplay) {
+            int type = 0;
+            for (int i1 = 0; i1 < points.size(); i1++) {
+                mPenView.setPenColor(Color.RED);
+                if (i1 == 0) {
+                    type = 0;
+                } else if (i1 == points.size() - 1) {
+                    type = 2;
+                } else {
+                    type = 1;
+                }
+                mPenView.processDotNewNet(points.get(i1), x, y, type);
+                SystemClock.sleep(50);
+//                mHandle.sendEmptyMessage(MSG_REPLAY);
+            }
+        }
+
+        bIsReplay = false;
     }
 
 
@@ -1298,7 +1419,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
                 }
-                LogUtils.e("gSpeed",(6 - gSpeed) * 10+"");
                 SystemClock.sleep((6 - gSpeed) * 10);
 
 //                mHandle.sendEmptyMessage(MSG_REPLAY);
@@ -1313,20 +1433,52 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void showReplayDialog(int index) {
+    private void showReplayDialog(int index, int t) {
 
         View pop = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_replay, null);
         final DrawView1 penview_dialog = pop.findViewById(R.id.penview_dialog);
-        penview_dialog.reset();
+        LinearLayout list = pop.findViewById(R.id.list);
         TextView evaluate = pop.findViewById(R.id.evaluate);
+        TextView content_tv = pop.findViewById(R.id.content);
+        ScrollView scrollView = pop.findViewById(R.id.scro);
         StrokeOrderView strokeOrderView = pop.findViewById(R.id.stroke_order_view);
-        String svgSix = getFromAssets("data/乖.json");
+        String name = "data/一.json";
+        if (index == 0) {
+            name = "data/六.json";
+        } else if (index == 1) {
+            name = "data/你.json";
+        } else {
+            name = "data/乖.json";
+        }
+        String svgSix = getFromAssets(name);
         strokeOrderView.setStrokesBySvg(svgSix);
-        new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> Replay(index, penview_dialog))), 1000);
+        if (t == 0) {
+            if (calligraphyResult.getData().getContent().getContent().isEmpty()) {
+                content_tv.setVisibility(View.GONE);
+            } else {
+                content_tv.setText(calligraphyResult.getData().getContent().getContent());
+            }
+            List<CalligraphyResult.DataDTO.Content.ListDTO> listDTOS = calligraphyResult.getData().getContent().getList();
+            initListData(listDTOS, list, penview_dialog,index);
+            evaluate.setText(new StringBuilder().append("本次书法得分：").append(calligraphyResult.getData().getScore()).append("分").toString());
+            if (!bIsReplay){
+                new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> ReplayNet(index, penview_dialog))), 1000);
+            }
+        } else if (t == 1) {
+            content_tv.setVisibility(View.GONE);
+            scrollView.setVisibility(View.GONE);
+            evaluate.setText(new StringBuilder().append("正在打分..."));
+            if (!bIsReplay){
+                new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> Replay(index, penview_dialog))), 1000);
+            }
+        }
+
         PopupWindow popupWindow = new PopupWindow(pop, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //        popupWindow.setAnimationStyle(R.style.first_popwindow_anim_style);
+//        popupWindow.setWidth(720);
+//                popupWindow.setAnimationStyle(R.style.first_popwindow_anim_style);
         popupWindow.setOutsideTouchable(false);
         popupWindow.setFocusable(false);
+
         View parent = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_hand, null);
         popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
         //popupWindow在弹窗的时候背景半透明
@@ -1348,40 +1500,44 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    /**
-     *
-     */
-//    private void showReplayDialog(int index) {
-//        if (dialog == null) {
-//            dialog = new Dialog(activity, R.style.customDialog);
-//        }
-//        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_replay, null);
-//
-//        DrawView1 penview_dialog = view.findViewById(R.id.penview_dialog);
-//        TextView evaluate = view.findViewById(R.id.evaluate);
-//
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Replay(index, penview_dialog);
-//            }
-//        }, 2000);
-//        evaluate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                if (mPenView != null) {
-////                    mPenView.reset();
-////                }
-////                if (!bIsReplay) {
-////                    dot_number.clear();
-////                }
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        dialog.setContentView(view);
-//        dialog.show();
-//    }
+
+    private void initListData(List<CalligraphyResult.DataDTO.Content.ListDTO> listDTOS, LinearLayout list, DrawView1 penview_dialog,int index) {
+        final int size = listDTOS.size();
+
+        for (int i = 0; i < size; i++) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            final View itemLayout = inflater.inflate(R.layout.name_item, null);
+            TextView tvNmae = itemLayout.findViewById(R.id.tv_name);
+            LinearLayout layoutContent = itemLayout.findViewById(R.id.layout_content);
+            if (listDTOS.get(i).getContent().size() == 0) {
+                tvNmae.setVisibility(View.GONE);
+            } else {
+                tvNmae.setVisibility(View.VISIBLE);
+                tvNmae.setText(listDTOS.get(i).getName());
+            }
+            for (int j = 0; j < listDTOS.get(i).getContent().size(); j++) {
+                CalligraphyResult.DataDTO.Content.ListDTO.ContentDTO contentDTO = listDTOS.get(i).getContent().get(j);
+                final View classItemLayout = inflater.inflate(R.layout.content_item, null);
+                final TextView tv_content_name = classItemLayout.findViewById(R.id.tv_content_name);
+                tv_content_name.setText(contentDTO.getContent());
+
+                tv_content_name.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        LogUtils.e("dbjbIsReplay",bIsReplay+"--");
+                        if (!bIsReplay){
+                            ThreadManager.getThreadPool().exeute(new Thread(() -> ReplayNet1(index, penview_dialog, contentDTO.getSequence())));
+                        }
+                        showToast(contentDTO.getContent());
+                    }
+                });
+                layoutContent.addView(classItemLayout);
+            }
+            list.addView(itemLayout);
+        }
+    }
+
+
     public void clearPenView() {
         PenData.firstDot = false;
         if (mPenView != null) {

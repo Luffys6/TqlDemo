@@ -19,6 +19,7 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import com.sonix.oidbluetooth.R;
+import com.sonix.oidbluetooth.bean.CalligraphyResult;
 import com.sonix.util.DotUtils;
 import com.sonix.util.LogUtils;
 import com.sonix.util.ThreadManager;
@@ -231,9 +232,28 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
                 mPen.onUp(pointX, pointY, 1, sCanvas);
                 break;
         }
-
-
     }
+
+
+    public void processDotNewNet(CalligraphyResult.DataDTO.PosListDTO.MovePointDTO dot, int a , int b,int type) {
+        pointX = dot.getX();
+        pointY = dot.getY();
+        pointY = (pointY -b)*2;
+        pointX = (pointX -a)*2;
+        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
+        switch (type) {
+            case 0:
+                mPen.onDown(pointX, pointY, 160, sCanvas);
+                break;
+            case 1:
+                mPen.onMove(pointX, pointY, 160, sCanvas);
+                break;
+            case 2:
+                mPen.onUp(pointX, pointY, 1, sCanvas);
+                break;
+        }
+    }
+
 
     /**
      * 底图id转化为bitmap,并算出点码规格
