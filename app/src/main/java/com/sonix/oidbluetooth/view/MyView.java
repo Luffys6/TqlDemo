@@ -56,7 +56,6 @@ public class MyView extends LinearLayout {
         this.addView(mTextView);
         this.addView(mView);
 
-
     }
 
 

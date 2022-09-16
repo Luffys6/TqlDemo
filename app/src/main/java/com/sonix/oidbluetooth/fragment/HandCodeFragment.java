@@ -1383,6 +1383,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     pointsBeans.clear();
                 }
                 dialog.dismiss();
+                dot_word.clear();
             }
         });
 
@@ -1409,6 +1410,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 int type = 0;
                 for (int i1 = 0; i1 < points.size(); i1++) {
 //                    mPenView.setPenColor(1);
+                    mPenView.setPenWidth(3);
                     if (i1 == 0) {
                         type = 0;
                     } else if (i1 == points.size() - 1) {
@@ -1445,6 +1447,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             int type = 0;
             for (int i1 = 0; i1 < points.size(); i1++) {
                 mPenView.setPenColor(Color.RED);
+                mPenView.setPenWidth(3);
                 if (i1 == 0) {
                     type = 0;
                 } else if (i1 == points.size() - 1) {
@@ -1476,7 +1479,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             //笔锋绘制方法
             if (bIsReplay) {
                 SetPenColor(dot.color);
-//                mPenView.setPenColor(1);
+                mPenView.setPenWidth(3);
                 mPenView.processDotNew(dot, x, y);
                 if (popup instanceof PopupReplay && popup.isShowing()) {
                     gSpeed = ((PopupReplay) popup).getSpeed();
@@ -1534,6 +1537,12 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> Replay(index, penview_dialog))), 1000);
             }
         }
+        penview_dialog.post(new Runnable() {
+            @Override
+            public void run() {
+                LogUtils.e("dbj",penview_dialog.getWidth()+penview_dialog.getHeight()+"----");
+            }
+        });
 
         PopupWindow popupWindow = new PopupWindow(pop, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        popupWindow.setWidth(720);

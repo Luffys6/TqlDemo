@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.PathParser
+import com.sonix.util.LogUtils
 import com.sonix.util.parseSvgJson
 import java.util.*
 
@@ -82,6 +83,7 @@ class StrokeOrderView : View {
         startAnimation() // 开始动画
     }
 
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -110,6 +112,7 @@ class StrokeOrderView : View {
 
         val w = measuredWidth
         val h = measuredHeight
+        LogUtils.e("dbj画板", "w=$w,h=$h");
         val layer = canvas.saveLayer(0F, 0F, w.toFloat(), h.toFloat(), null)
 
         // 目标Bitmap
@@ -218,7 +221,7 @@ class StrokeOrderView : View {
                 sleepAnimation()
                 postInvalidate()
             }
-            animator.duration = 900
+            animator.duration = 1500
             animators.add(animator)
         }
         set.playSequentially(animators)
@@ -227,7 +230,7 @@ class StrokeOrderView : View {
 
     private fun sleepAnimation() {
         try {
-            Thread.sleep(30)
+            Thread.sleep(50)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }

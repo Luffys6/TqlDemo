@@ -53,8 +53,8 @@
 
                 <com.sonix.surfaceview.DrawView1
                     android:id="@+id/penview_dialog"
-                    android:layout_width="98dp"
-                    android:layout_height="90dp" />
+                    android:layout_width="240px"
+                    android:layout_height="240px" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -73,8 +73,8 @@
 
                 <com.sonix.oidbluetooth.view.StrokeOrderView
                     android:id="@+id/stroke_order_view"
-                    android:layout_width="98dp"
-                    android:layout_height="90dp"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
                     android:background="#aaa" />
 
                 <TextView

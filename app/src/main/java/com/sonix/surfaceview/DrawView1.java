@@ -98,7 +98,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         //底图dpi
         imageDpi = typedArray.getInt(R.styleable.DrawView_resources_dpi, 300);
         //底图背景资源
-        mBgResourceId = typedArray.getResourceId(R.styleable.DrawView_background_resources, R.drawable.tzg);
+        mBgResourceId = typedArray.getResourceId(R.styleable.DrawView_background_resources, R.drawable.t);
         //生成背景图片
         setBgBitmap(mBgResourceId, imageDpi);
         init(context);
@@ -134,20 +134,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         mTextPaint.setColor(Color.parseColor("#8ca2d1"));
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int boardHeight = getBoardHeight(widthSize);
-        if (boardHeight > heightSize) {
-            setMeasuredDimension(getBoardWidth(heightSize), heightSize);
 
-        } else {
-            setMeasuredDimension(widthSize, boardHeight);
-        }
-
-    }
 
 
     @Override
@@ -155,17 +142,18 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         super.onSizeChanged(w, h, oldw, oldh);
         BG_WIDTH = w;
         BG_HEIGHT = h;
-        LAST_PAPER_WIDTH = PAPER_WIDTH;
-        LAST_PAPER_HEIGHT = PAPER_HEIGHT;
+//        LAST_PAPER_WIDTH = PAPER_WIDTH;
+//        LAST_PAPER_HEIGHT = PAPER_HEIGHT;
+        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
 
         bgWrite = Bitmap.createScaledBitmap(mBitmap, w, h, true);
 
         initCanvas(bgWrite);
 
-        if (mOnSizeChangeListener != null) {
-            mOnSizeChangeListener.onSizeChanged(w, h, oldw, oldh);//切换后的Down点等待绘制
-            mOnSizeChangeListener = null;
-        }
+//        if (mOnSizeChangeListener != null) {
+//            mOnSizeChangeListener.onSizeChanged(w, h, oldw, oldh);//切换后的Down点等待绘制
+//            mOnSizeChangeListener = null;
+//        }
     }
 
 
@@ -241,6 +229,8 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         pointY = (pointY -b)*2;
         pointX = (pointX -a)*2;
 //        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
+//        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
+
         switch (type) {
             case 0:
                 mPen.onDown(pointX, pointY, 160, sCanvas);
