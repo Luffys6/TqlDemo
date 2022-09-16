@@ -420,7 +420,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onClick(View v) {
 //                        showReplayDialog(finalI);
-                        if (pointsBeans != null && pointsBeans.size() > 0) {
+                        LogUtils.e("点点","area="+area+",finalI="+finalI);
+                        if (pointsBeans != null && pointsBeans.size() > 0&&area == finalI) {
                             onSave();
                             showReplayDialog(finalI, 1);
                         } else {
@@ -941,7 +942,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 JudgeBean judgeBean = gson.fromJson(s, JudgeBean.class);
                 if (judgeBean.getResponse().equals("ok")) {
                     showToast("打分成功，再次点击查看结果");
-                    dot_word.get(index).clear();
+//                    dot_word.get(index).clear();
                 }
             }
 
@@ -1503,13 +1504,13 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         TextView content_tv = pop.findViewById(R.id.content);
         ScrollView scrollView = pop.findViewById(R.id.scro);
         StrokeOrderView strokeOrderView = pop.findViewById(R.id.stroke_order_view);
-        String name = "data/一.json";
+        String name ;
         if (index == 0) {
-            name = "data/六.json";
+            name = "data/他.json";
         } else if (index == 1) {
             name = "data/你.json";
         } else {
-            name = "data/乖.json";
+            name = "data/以.json";
         }
         String svgSix = getFromAssets(name);
         strokeOrderView.setStrokesBySvg(svgSix);

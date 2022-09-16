@@ -240,7 +240,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         pointY = dot.getY();
         pointY = (pointY -b)*2;
         pointX = (pointX -a)*2;
-        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
+//        LogUtils.e("dbj", "pointX=" + pointX + ",pointY=" + pointY);
         switch (type) {
             case 0:
                 mPen.onDown(pointX, pointY, 160, sCanvas);
