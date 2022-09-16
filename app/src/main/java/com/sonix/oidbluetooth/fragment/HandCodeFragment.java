@@ -303,8 +303,82 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void addView() {
+//    private void addView() {
+//
+//        myLayout.post(() -> {
+//            int width = myLayout.getWidth();
+//            int height = myLayout.getHeight();
+//            if (posListBeans == null) {
+//                showToast("未获取到服务器数据");
+//                return;
+//            }
+//            for (int i1 = 0; i1 < posListBeans.size(); i1++) {
+//
+//                MyView view = new MyView(getActivity());
+//                myLayout.addView(view);
+//
+//                ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
+////                ViewGroup.MarginLayoutParams margin1 = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
+//
+//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(margin);
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(margin);
+//                FrameLayout.LayoutParams ViewParams = new FrameLayout.LayoutParams(margin);
+//
+////                float xRatio1 = (float) width / (float) widths;
+////                float yRatio1 = (float) height / (float) heights;
+////                    thanH = yRatio1;
+////                    thanW = xRatio1;
+////                LogUtils.e("dbj坐标比例",width+"------"+height);
+////                LogUtils.e("dbj坐标比例",xRatio1+"------"+yRatio1);
+//                float xRatio1 = 1.0F;
+//                float yRatio1 = 1.0F;
+//                int x = (int) ((float) (posListBeans.get(i1).getX()) * xRatio1);
+//                int y = (int) ((float) (posListBeans.get(i1).getY()) * yRatio1);
+//                int ax = (int) ((float) (posListBeans.get(i1).getAx()) * xRatio1);
+//                int ay = (int) ((float) (posListBeans.get(i1).getAy()) * yRatio1);
+//                int w = ax - x;
+//                int h = ay - y;
+//                int left = x;
+//                int top = y;
+//
+//                layoutParams.width = w;
+//                layoutParams.height = h;
+//                layoutParams.leftMargin = 0;
+//                layoutParams.topMargin = 6;
+//
+//                params.width = w;
+//                params.height = 32;
+//                params.leftMargin = 0;
+//                params.topMargin = 0;
+//
+//                ViewParams.width = w;
+//                ViewParams.height = h+40;
+//                ViewParams.leftMargin = left;
+//                ViewParams.topMargin = top-32;
+//                 view.getChildAt(1).setBackgroundResource(R.drawable.shape_black_border);
+//                int finalI = i1;
+//                view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+////                        showReplayDialog(finalI);
+//                        if (pointsBeans != null && pointsBeans.size() > 0) {
+//                            onSave();
+//                            showReplayDialog(finalI, 1);
+//                        } else {
+//                            GetResult(finalI);
+//                        }
+//                    }
+//                });
+//                view.setLayoutParams(ViewParams);
+//                view.getChildAt(1).setLayoutParams(layoutParams);
+//                view.getChildAt(0).setLayoutParams(params);
+//            }
+//        });
+//    }
 
+
+
+    private void addView() {
         myLayout.post(() -> {
             int width = myLayout.getWidth();
             int height = myLayout.getHeight();
@@ -318,10 +392,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 myLayout.addView(view);
 
                 ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
-//                ViewGroup.MarginLayoutParams margin1 = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
-
-//                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(margin1);
-                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin);
+                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin);
 
 //                float xRatio1 = (float) width / (float) widths;
 //                float yRatio1 = (float) height / (float) heights;
@@ -339,17 +410,10 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 int h = ay - y;
                 int left = x;
                 int top = y;
-
                 layoutParams.width = w;
                 layoutParams.height = h;
                 layoutParams.leftMargin = left;
                 layoutParams.topMargin = top;
-
-//                params.width = 1000;
-//                params.height = 600;
-//                params.leftMargin = left;
-//                params.topMargin = top-20;
-
                 view.setBackgroundResource(R.drawable.shape_black_border);
                 int finalI = i1;
                 view.setOnClickListener(new View.OnClickListener() {
@@ -364,12 +428,10 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                 });
-//                view.getChildAt(1).setLayoutParams(layoutParams);
                 view.setLayoutParams(layoutParams);
             }
         });
     }
-
     /**
      * 区域
      */
@@ -1377,7 +1439,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             return;
         }
         a = a -1;
-        LogUtils.e("dbjaa",a+"");
         List<CalligraphyResult.DataDTO.PosListDTO.MovePointDTO> points = dots.get(a).getMovePoint();
         if (bIsReplay) {
             int type = 0;
