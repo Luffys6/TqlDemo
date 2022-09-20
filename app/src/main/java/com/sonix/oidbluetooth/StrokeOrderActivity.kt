@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.sonix.oidbluetooth.view.StrokeOrderView
+import com.sonix.oidbluetooth.view.StrokeOrderViewJava
 
 import java.io.BufferedReader
 import java.io.IOException
@@ -18,8 +19,8 @@ class StrokeOrderActivity : AppCompatActivity() {
 
     var svgSix: String? = null
     var svgOne: String? = null
-    lateinit var strokeOrderView1: StrokeOrderView
-    lateinit var strokeOrderView2: StrokeOrderView
+    lateinit var strokeOrderView1: StrokeOrderViewJava
+    lateinit var strokeOrderView2: StrokeOrderViewJava
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class StrokeOrderActivity : AppCompatActivity() {
         strokeOrderView2 = findViewById(R.id.stroke_order_view2)
 
         findViewById<Button>(R.id.btn_load_svg_six).setOnClickListener {
-            val name = "六.json" // 需要将 svg.json 放在 assets 或特定路径下
+            val name = "你.json" // 需要将 svg.json 放在 assets 或特定路径下
             svgSix = loadSvgFromAssets(name)
             svgSix?.let {
                 strokeOrderView1.setStrokesBySvg(it)
@@ -38,7 +39,7 @@ class StrokeOrderActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_load_svg_one).setOnClickListener {
-            val name = "一.json"
+            val name = "以.json"
             svgOne = loadSvgFromAssets(name)
 
             svgOne?.let {

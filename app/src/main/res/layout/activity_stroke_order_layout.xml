@@ -17,7 +17,7 @@
                 android:id="@+id/btn_load_svg_six"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="666"
+                android:text="你"
                 android:textAllCaps="false"
                 />
 
@@ -25,7 +25,7 @@
                 android:id="@+id/btn_load_svg_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="111"
+                android:text="以"
                 android:textAllCaps="false"
                 />
         </LinearLayout>
@@ -40,18 +40,22 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.sonix.oidbluetooth.view.StrokeOrderView
+        <com.sonix.oidbluetooth.view.StrokeOrderViewJava
             android:id="@+id/stroke_order_view1"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="#aaa"/>
 
-        <com.sonix.oidbluetooth.view.StrokeOrderView
+        <com.sonix.oidbluetooth.view.StrokeOrderViewJava
             android:id="@+id/stroke_order_view2"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="24dp"
             android:background="#aaa"/>
     </LinearLayout>
+    <com.sonix.oidbluetooth.view.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#aaa"/>
 
 </LinearLayout>
