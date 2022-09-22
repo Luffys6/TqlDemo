@@ -67,8 +67,10 @@ import com.sonix.oidbluetooth.R;
 import com.sonix.oidbluetooth.RecognitionActivity;
 import com.sonix.oidbluetooth.SearchActivity;
 import com.sonix.oidbluetooth.StrokeOrderActivity;
+import com.sonix.oidbluetooth.TestActivity;
 import com.sonix.oidbluetooth.bean.CalligraphyResult;
 import com.sonix.oidbluetooth.bean.JudgeBean;
+import com.sonix.oidbluetooth.view.MyImageTextView;
 import com.sonix.oidbluetooth.view.PopupCheckListener;
 import com.sonix.oidbluetooth.view.PopupColor;
 import com.sonix.oidbluetooth.view.PopupListener;
@@ -244,7 +246,10 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         itv_submit.setOnClickListener(this);
         myLayout = view.findViewById(R.id.myLayout);
 //        App.getInstance().setmReceiveDotListener(this);
-
+        MyImageTextView clip = view.findViewById(R.id.clip);
+        clip.setOnClickListener(view1 -> {
+            startActivity(new Intent(getActivity(), TestActivity.class));
+        });
         return view;
     }
 
@@ -369,7 +374,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
 //    }
 
 
-
     private void addView() {
         myLayout.post(() -> {
             int width = myLayout.getWidth();
@@ -384,7 +388,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 myLayout.addView(view);
 
                 ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
-                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin);
+                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin);
 
 //                float xRatio1 = (float) width / (float) widths;
 //                float yRatio1 = (float) height / (float) heights;
@@ -412,8 +416,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onClick(View v) {
 //                        showReplayDialog(finalI);
-                        LogUtils.e("点点","area="+area+",finalI="+finalI);
-                        if (pointsBeans != null && pointsBeans.size() > 0&&area == finalI) {
+                        LogUtils.e("点点", "area=" + area + ",finalI=" + finalI);
+                        if (pointsBeans != null && pointsBeans.size() > 0 && area == finalI) {
                             onSave();
                             showReplayDialog(finalI, 1);
                         } else {
@@ -425,6 +429,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
     /**
      * 区域
      */
@@ -1421,7 +1426,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
 
 
     private void ReplayNet1(int index, DrawView1 mPenView, int a) {
-         int x = posListBeans.get(index).getX();
+        int x = posListBeans.get(index).getX();
         int y = posListBeans.get(index).getY();
         List<CalligraphyResult.DataDTO.PosListDTO> dots = calligraphyResult.getData().getPos_list();
         if (dots == null || dots.isEmpty()) {
@@ -1429,11 +1434,11 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             return;
         }
         bIsReplay = true;
-        if (a>dots.size()){
+        if (a > dots.size()) {
             bIsReplay = false;
             return;
         }
-        a = a -1;
+        a = a - 1;
         List<CalligraphyResult.DataDTO.PosListDTO.MovePointDTO> points = dots.get(a).getMovePoint();
         if (bIsReplay) {
             int type = 0;
@@ -1499,7 +1504,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         TextView content_tv = pop.findViewById(R.id.content);
         ScrollView scrollView = pop.findViewById(R.id.scro);
         StrokeOrderView strokeOrderView = pop.findViewById(R.id.stroke_order_view);
-        String name ;
+        String name;
         if (index == 0) {
             name = "data/他.json";
         } else if (index == 1) {
@@ -1516,23 +1521,23 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 content_tv.setText(calligraphyResult.getData().getContent().getContent());
             }
             List<CalligraphyResult.DataDTO.Content.ListDTO> listDTOS = calligraphyResult.getData().getContent().getList();
-            initListData(listDTOS, list, penview_dialog,index);
+            initListData(listDTOS, list, penview_dialog, index);
             evaluate.setText(new StringBuilder().append("本次书法得分：").append(calligraphyResult.getData().getScore()).append("分").toString());
-            if (!bIsReplay){
+            if (!bIsReplay) {
                 new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> ReplayNet(index, penview_dialog))), 1000);
             }
         } else if (t == 1) {
             content_tv.setVisibility(View.GONE);
             scrollView.setVisibility(View.GONE);
             evaluate.setText(new StringBuilder().append("正在打分..."));
-            if (!bIsReplay){
+            if (!bIsReplay) {
                 new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> Replay(index, penview_dialog))), 1000);
             }
         }
         penview_dialog.post(new Runnable() {
             @Override
             public void run() {
-                LogUtils.e("dbj",penview_dialog.getWidth()+penview_dialog.getHeight()+"----");
+                LogUtils.e("dbj", penview_dialog.getWidth() + penview_dialog.getHeight() + "----");
             }
         });
 
@@ -1564,7 +1569,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void initListData(List<CalligraphyResult.DataDTO.Content.ListDTO> listDTOS, LinearLayout list, DrawView1 penview_dialog,int index) {
+    private void initListData(List<CalligraphyResult.DataDTO.Content.ListDTO> listDTOS, LinearLayout list, DrawView1 penview_dialog, int index) {
         final int size = listDTOS.size();
 
         for (int i = 0; i < size; i++) {
@@ -1587,8 +1592,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 tv_content_name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        LogUtils.e("dbjbIsReplay",bIsReplay+"--");
-                        if (!bIsReplay){
+                        LogUtils.e("dbjbIsReplay", bIsReplay + "--");
+                        if (!bIsReplay) {
                             ThreadManager.getThreadPool().exeute(new Thread(() -> ReplayNet1(index, penview_dialog, contentDTO.getSequence())));
                         }
                         showToast(contentDTO.getContent());

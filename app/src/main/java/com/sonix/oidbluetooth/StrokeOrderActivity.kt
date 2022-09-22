@@ -50,7 +50,7 @@ class StrokeOrderActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_load_svg_one).setOnClickListener {
-            val name = "以.json"
+            val name = "你.json"
             svgOne = loadSvgFromAssets(name)
 
             svgOne?.let {

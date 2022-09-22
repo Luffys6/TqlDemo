@@ -15,6 +15,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
+import androidx.multidex.MultiDex;
+
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -187,6 +189,7 @@ public class App extends Application implements TQLPenSignal {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         instance = this;
         //多语言设置
         registerActivityLifecycleCallbacks(MultiLanguageUtils.callbacks);

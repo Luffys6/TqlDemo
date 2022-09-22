@@ -44,7 +44,16 @@
             app:text="@string/width"
             app:text_color="@color/selector_textview"
             app:text_direction="bottom" />
-
+        <com.sonix.oidbluetooth.view.MyImageTextView
+            android:id="@+id/clip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:img_src="@drawable/selector_width"
+            app:text="View Clip"
+            app:text_color="@color/selector_textview"
+            app:text_direction="bottom" />
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_submit"
             android:layout_width="0dp"

@@ -81,7 +81,7 @@
     <string name="ztsb">暂停失败</string>
     <string name="ljznbmacbh">连接智能笔MAC编号</string>
     <string name="ckbwmacbh">查看笔尾MAC编号，连接智能笔</string>
-    <string name="recognition" >手写识别</string>
+    <string name="recognition">手写识别</string>
 
     <string name="pdz">配对中</string>
     <string name="ljz">连接中</string>
