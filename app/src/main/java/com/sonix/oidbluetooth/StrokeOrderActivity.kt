@@ -1,26 +1,35 @@
 package com.sonix.oidbluetooth
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.gson.Gson
+import com.sonix.oidbluetooth.bean.HanziBean
+import com.sonix.oidbluetooth.view.HanziWriterView
 import com.sonix.oidbluetooth.view.StrokeOrderView
 import com.sonix.oidbluetooth.view.StrokeOrderViewJava
+import com.sonix.oidbluetooth.view.StrokeOrderViewJavaNew
+import com.sonix.util.ThreadManager
 
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.util.*
+import kotlin.concurrent.schedule
 
 class StrokeOrderActivity : AppCompatActivity() {
 
     var svgSix: String? = null
     var svgOne: String? = null
     lateinit var strokeOrderView1: StrokeOrderViewJava
-    lateinit var strokeOrderView2: StrokeOrderViewJava
+    lateinit var strokeOrderView2: StrokeOrderViewJavaNew
+    private var hanziBean: HanziBean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +52,14 @@ class StrokeOrderActivity : AppCompatActivity() {
             svgOne = loadSvgFromAssets(name)
 
             svgOne?.let {
+                hanziBean = Gson().fromJson(it, HanziBean::class.java)
+                strokeOrderView2.setHanziBean(hanziBean)
+                strokeOrderView2.writerHanzi()
 
-                strokeOrderView2.setStrokesBySvg(it)
+                Handler().postDelayed({
+                    strokeOrderView2.startAnimation()
+                },3000);
+
             }
         }
 

@@ -90,11 +90,11 @@ public class SearchView extends View {
 
         mStartingAnimator.addListener(mAnimatorListener);
         mSearchingAnimator.addListener(mAnimatorListener);
-        mSearchingAnimator.setRepeatCount(10);
+        mSearchingAnimator.setRepeatCount(1);
         mEndingAnimator.addListener(mAnimatorListener);
 
         // 进入开始动画
-        mCurrentState = State.NONE;
+        mCurrentState = State.STARING;
         mStartingAnimator.start();
     }
 
@@ -106,7 +106,10 @@ public class SearchView extends View {
 
         @Override
         public void onAnimationEnd(Animator animator) {
-
+            mCurrentState = State.STARING;
+            mCurrentState = State.SEARCHING;
+            mStartingAnimator.start();
+            mSearchingAnimator.start();
         }
 
         @Override
@@ -116,7 +119,10 @@ public class SearchView extends View {
 
         @Override
         public void onAnimationRepeat(Animator animator) {
-
+            mCurrentState = State.STARING;
+            mCurrentState = State.SEARCHING;
+            mStartingAnimator.start();
+            mSearchingAnimator.start();
         }
     };
     private Path path = new Path();

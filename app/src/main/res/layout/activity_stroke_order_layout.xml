@@ -46,16 +46,16 @@
             android:layout_height="120dp"
             android:background="#aaa"/>
 
-        <com.sonix.oidbluetooth.view.StrokeOrderViewJava
+        <com.sonix.oidbluetooth.view.StrokeOrderViewJavaNew
             android:id="@+id/stroke_order_view2"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="24dp"
             android:background="#aaa"/>
     </LinearLayout>
-    <com.sonix.oidbluetooth.view.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#aaa"/>
+<!--    <com.sonix.oidbluetooth.view.SearchView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:background="#aaa"/>-->
 
 </LinearLayout>
