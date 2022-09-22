@@ -1,5 +1,6 @@
 package com.sonix.oidbluetooth
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -14,6 +15,7 @@ import com.sonix.oidbluetooth.view.HanziWriterView
 import com.sonix.oidbluetooth.view.StrokeOrderView
 import com.sonix.oidbluetooth.view.StrokeOrderViewJava
 import com.sonix.oidbluetooth.view.StrokeOrderViewJavaNew
+import com.sonix.util.LogUtils
 import com.sonix.util.ThreadManager
 
 import java.io.BufferedReader
@@ -58,10 +60,18 @@ class StrokeOrderActivity : AppCompatActivity() {
 
                 Handler().postDelayed({
                     strokeOrderView2.startAnimation()
-                },3000);
+                },1000);
 
             }
         }
+//        strokeOrderView2.setOnAnimStrokeWriterStartListener {
+//            if (it == hanziBean!!.strokeCount-1){
+//                Handler().postDelayed({
+//                    strokeOrderView2.setPosition(2)
+//                },2000)
+//            }
+//
+//        }
 
     }
 

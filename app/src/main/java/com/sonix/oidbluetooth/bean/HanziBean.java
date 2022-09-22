@@ -267,8 +267,7 @@ public class HanziBean {
      * 获取总共有多少画
      * @return
      */
-    public int
-    getStrokeCount(){
+    public int getStrokeCount(){
         return Math.min(getStrokeData().size(), getMedians().size());
     }
 
