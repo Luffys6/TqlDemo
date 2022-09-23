@@ -31,8 +31,8 @@ public class StrokeOrderViewJavaNew extends View {
     private Path animPath = new Path();
     private Paint animPaint = new Paint();
 
-    private int bgColor = Color.BLACK; //背景字颜色
-    private int animColor = Color.GREEN;
+    private int bgColor = Color.RED; //背景字颜色
+    private int animColor = Color.BLACK;
     private HanziBean hanziBean;
     private AnimatorSet writerAnim;
     private int position = -1;
@@ -117,7 +117,7 @@ public class StrokeOrderViewJavaNew extends View {
                 canvas.drawPath(hanziBean.getStrokePaths().get(i), strokePaint);
             }
             if (mode == MODE_ANIM && currIndex < hanziBean.getStrokeCount()) {
-                 canvas.clipPath(hanziBean.getStrokePaths().get(currIndex));
+                canvas.clipPath(hanziBean.getStrokePaths().get(currIndex));
                 canvas.drawPath(animPath, animPaint);
             }
         }
@@ -199,6 +199,7 @@ public class StrokeOrderViewJavaNew extends View {
         va.setDuration(500);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             PathMeasure pm;
+
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float value = (float) valueAnimator.getAnimatedValue();
