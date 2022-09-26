@@ -86,6 +86,7 @@ import com.sonix.ota.McuActivity;
 import com.sonix.ota.OTAActivity;
 import com.sonix.surfaceview.DrawView;
 import com.sonix.surfaceview.DrawView1;
+import com.sonix.util.BitmapUtils;
 import com.sonix.util.ColorUtil;
 import com.sonix.util.DataHolder;
 import com.sonix.util.DotUtils;
@@ -434,7 +435,9 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
      * 区域
      */
     private int area = -1;
-
+    private Bitmap btm;
+    private Bitmap bitmap;
+private int filePos = 0;
     private void isRect(int x, int y, Dot dot) {
         if (posListBeans == null) {
             return;
@@ -466,6 +469,19 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     pointsBean.setIndex(i);
                     pointsBeans.add(pointsBean);
                     mPenView.processDot(pointX, pointY, pointZ, 2);
+//                    BitmapUtils.getMagicDrawingCache(getActivity(), mPenView, false);
+//                    BitmapUtils.bit(myLayout);
+                    try {
+                        btm = mPenView.getScreenshot();
+                        bitmap = Bitmap.createBitmap(btm, posListBeans.get(i).getX(), posListBeans.get(i).getY(), posListBeans.get(i).getAx()-posListBeans.get(i).getX()
+                                , posListBeans.get(i).getAy()-posListBeans.get(i).getY());
+
+                        BitmapUtils.saveToLocal(bitmap, filePos + ".png");
+                        filePos++;
+                        Thread.sleep(80);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 dot_word.put(i, dot);
                 if (area != i) {
@@ -514,7 +530,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     public void onStop() {
         super.onStop();
         LogUtils.i(TAG, "onStop:");
-
 
     }
 
