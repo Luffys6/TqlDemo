@@ -51,7 +51,7 @@ public class StrokeOrderViewJavaNew extends View {
 
 
         animPaint.setColor(animColor);
-        animPaint.setStrokeWidth(100);
+        animPaint.setStrokeWidth(50);
         animPaint.setStyle(Paint.Style.STROKE);
         animPaint.setStrokeCap(Paint.Cap.ROUND);
 
@@ -138,7 +138,7 @@ public class StrokeOrderViewJavaNew extends View {
         int index = 0;
         for (Path path : hanziBean.getMedianPaths()) {
             ValueAnimator va = ValueAnimator.ofFloat(0, 1);
-            va.setDuration(2000);
+            va.setDuration(500);
             va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 PathMeasure pm;
 
