@@ -1,6 +1,7 @@
 package com.sonix.surfaceview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -138,6 +139,11 @@ public class StrokePen extends BasePen {
     @Override
     public float getPenWidth() {
         return penWidth;
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        return null;
     }
 
     @Override

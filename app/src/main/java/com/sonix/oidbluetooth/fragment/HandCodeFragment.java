@@ -472,13 +472,14 @@ private int filePos = 0;
 //                    BitmapUtils.getMagicDrawingCache(getActivity(), mPenView, false);
 //                    BitmapUtils.bit(myLayout);
                     try {
-                        btm = mPenView.getScreenshot();
+                        btm = mPenView.getUserWrite();
+//                        BitmapUtils.saveToLocal(btm,   "主.png");
                         bitmap = Bitmap.createBitmap(btm, posListBeans.get(i).getX(), posListBeans.get(i).getY(), posListBeans.get(i).getAx()-posListBeans.get(i).getX()
                                 , posListBeans.get(i).getAy()-posListBeans.get(i).getY());
 
                         BitmapUtils.saveToLocal(bitmap, filePos + ".png");
                         filePos++;
-                        Thread.sleep(80);
+//                        Thread.sleep(80);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

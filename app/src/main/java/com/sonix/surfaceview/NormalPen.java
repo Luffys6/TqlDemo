@@ -1,6 +1,7 @@
 package com.sonix.surfaceview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -71,6 +72,7 @@ public class NormalPen extends BasePen {
     private Context mContext;
     //是否是涂鸦模式
     private boolean isDoodle = false;
+    private int bgWidth, bgHeight;
 
     public NormalPen(Context context) {
         this.mContext = context;
@@ -185,6 +187,12 @@ public class NormalPen extends BasePen {
     }
 
     @Override
+    public void BGSize(int bgWidth, int bgHeight) {
+        this.bgHeight = bgHeight;
+        this.bgWidth = bgWidth;
+    }
+
+    @Override
     public String getPenColor() {
         return isDoodle ? doodleColor : penColor;
     }
@@ -246,14 +254,15 @@ public class NormalPen extends BasePen {
                     (x + mLastX) / 2,
                     (y + mLastY) / 2);
 
-//            drawPathCanvas(canvas);
 
+//            bitmap = Bitmap.createBitmap(bgWidth, bgHeight, Bitmap.Config.ARGB_8888);
+//            Canvas canvas1 = new Canvas(bitmap);
+//            draws(canvas1);
 
             draws(canvas);
 
             mLastX = 0;//清0
             mLastY = 0;
-
 
 
             moveNumber = 0;
@@ -278,12 +287,12 @@ public class NormalPen extends BasePen {
         doPreDraw(canvas);
     }
 
+    private Bitmap bitmap;
+    private Canvas canvas1;
 
     private synchronized void doPreDraw(Canvas canvas) {
-
         mWeakReferencePathList.clear();
         mWeakReferencePathList.addAll(mPathList);//用一个新的集合来遍历
-
         //避免遍历的时候  mPathList在其他地方做了增删操作  导致异常java.util.ConcurrentModificationException异常
         for (DrawPath path : mWeakReferencePathList) {
             //用mPathList循环会出现界面闪烁  笔画断一点或者颜色异常
@@ -294,6 +303,10 @@ public class NormalPen extends BasePen {
 
 //        lastListSize = mPathList.size();
 
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
     @Override

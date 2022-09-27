@@ -1,7 +1,6 @@
 package com.sonix.surfaceview;
 
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -44,12 +43,14 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
     /**
      * 笔记本实际规格大小默认B5笔记本
      */
-    private double PAPER_WIDTH =  1;
-    private double PAPER_HEIGHT =  1;
+    private double PAPER_WIDTH = 1;
+    private double PAPER_HEIGHT = 1;
     private double LAST_PAPER_WIDTH = -1;
     private double LAST_PAPER_HEIGHT = -1;
     private Canvas mCanvas;
     private Canvas sCanvas;
+
+
     /**
      * 绘制页码的画笔
      */
@@ -64,6 +65,9 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
      */
     private BasePen mPen;
     private Bitmap bgWrite;
+    private Bitmap userWrite;
+
+
     private int imageDpi;
     private int mBgResourceId;
     //笔锋类型
@@ -104,7 +108,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
         }
         return false;
     }
-
 
 
     private void init(Context context) {
@@ -151,8 +154,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
     }
 
 
-
-
     public void setOnSizeChangeListener(OnSizeChangeListener listener) {
         this.mOnSizeChangeListener = listener;
     }
@@ -170,15 +171,17 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
         BG_HEIGHT = h;
         LAST_PAPER_WIDTH = PAPER_WIDTH;
         LAST_PAPER_HEIGHT = PAPER_HEIGHT;
-        if (BG_HEIGHT<=0||BG_WIDTH<=0){
+        if (BG_HEIGHT <= 0 || BG_WIDTH <= 0) {
             return;
         }
         bgWrite = Bitmap.createScaledBitmap(mBitmap, BG_WIDTH, BG_HEIGHT, true);
+        mPen.BGSize(BG_WIDTH, BG_HEIGHT);
         initCanvas(bgWrite);
 
-        if (mOnSizeChangeListener!=null){
-            mOnSizeChangeListener.onSizeChanged(w,h,oldw,oldh);
-            mOnSizeChangeListener=null;
+
+        if (mOnSizeChangeListener != null) {
+            mOnSizeChangeListener.onSizeChanged(w, h, oldw, oldh);
+            mOnSizeChangeListener = null;
         }
 
     }
@@ -197,7 +200,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
     }
 
 
-
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         //Log.i(TAG, "surfaceDestroyed: ");
@@ -206,7 +208,7 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     public void reset() {
         mPen.clear();
-        if (BG_WIDTH<=0||BG_HEIGHT<=0){
+        if (BG_WIDTH <= 0 || BG_HEIGHT <= 0) {
             return;
         }
         bgWrite = Bitmap.createScaledBitmap(mBitmap, BG_WIDTH, BG_HEIGHT, true);
@@ -214,13 +216,14 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
             mCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         }
         initCanvas(bgWrite);
-    }
 
+    }
 
 
     /**
      * 绘制数据
-     *    历史 回访
+     * 历史 回访
+     *
      * @param dot
      */
     public void processDot(Dot dot) {
@@ -261,8 +264,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
      * @param dotType 笔迹状态，down move up
      */
     public void processDot(float pointX, float pointY, int force, int dotType) {
-//        Log.i(TAG, "pointX: " + pointX + "---pointY:" + pointY + "---force:" + force + "---dotType:" + dotType);
-
         switch (dotType) {
             case 0:
 //                drawPageNum(sCanvas);
@@ -335,13 +336,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
     }
 
     /**
-     * 设置涂鸦触摸接口
-     */
-    public void setDoodleTouchEventListener(DoodleTouchEvent listener) {
-        this.mOnTouchEvent = listener;
-    }
-
-    /**
      * 切换背景图
      *
      * @param resId 图片id
@@ -357,45 +351,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
         requestLayout();
     }
 
-    /**
-     * 切换背景图
-     *
-     * @param resId 图片id
-     * @param dpi   底图的dpi
-     */
-    public void replaceBackgroundImage2(int resId, int dpi) {
-        imageDpi = dpi;
-        //setBgBitmap(resId, dpi);
-
-        mBitmap = Bitmap.createBitmap(2800, 2100, Bitmap.Config.ARGB_8888);
-        Double[] doubles = DotUtils.calculateBookSize(mBitmap, 150);
-        //Log.i(TAG, "底图width=" + mBitmap.getWidth() + "//height=" + mBitmap.getHeight() + "换算之后的宽高；" + Arrays.toString(doubles));
-        PAPER_WIDTH = doubles[0];
-        PAPER_HEIGHT = doubles[1];
-        //重新调用一遍measure（）onLayout() onDraw()方法
-        requestLayout();
-    }
-
-    /**
-     * 切换背景图
-     *
-     * @param bitmap bitmap
-     * @param dpi    底图的dpi
-     */
-    public void replaceBackgroundImage(Bitmap bitmap, int dpi) {
-
-        imageDpi = dpi;
-        mBitmap = bitmap;
-        Double[] doubles = DotUtils.calculateBookSize(bitmap, imageDpi);
-        PAPER_WIDTH = doubles[0];
-        PAPER_HEIGHT = doubles[1];
-//        bgWrite = Bitmap.createScaledBitmap(mBitmap, BG_WIDTH, BG_HEIGHT, true);
-//
-//        initCanvas(bgWrite);
-
-        //重新调用一遍measure（）onLayout() onDraw()方法
-        requestLayout();
-    }
 
     public void setNoteParameter(int bookId, int pageId) {
         mBookId = bookId;
@@ -410,9 +365,8 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
         //canvas抗锯齿
         sCanvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         sCanvas.setBitmap(bitmap);
-
-
     }
+
 
     /**
      * 获取view截图
@@ -423,6 +377,18 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
 
         return bgWrite;
     }
+
+
+    /**
+     * 获取view截图
+     *
+     * @return
+     */
+    public Bitmap getUserWrite() {
+
+        return mPen.getBitmap();
+    }
+
 
     /**
      * 按比例动态设置宽度
@@ -480,17 +446,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
         mPen.setPenWidth(penWidth);
     }
 
-    /**
-     * 根据像素密度动态计算笔迹宽度
-     *
-     * @param width
-     * @return
-     */
-    private float transformWidth(float width) {
-        float density = mContext.getResources().getDisplayMetrics().density;
-        //Log.i(TAG, "transformWidth: width=" + width + "///density=" + density);
-        return width * density * 0.5f;
-    }
 
     /**
      * 设置笔的类型
@@ -552,8 +507,6 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback, Run
                 e.printStackTrace();
             }
         }
-
-
     }
 
 

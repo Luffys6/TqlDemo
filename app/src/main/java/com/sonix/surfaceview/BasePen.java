@@ -1,5 +1,6 @@
 package com.sonix.surfaceview;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
@@ -30,6 +31,17 @@ public abstract class BasePen {
      */
     public abstract void setPenWidth(float penWidth);
 
+
+    /**
+     *
+     *
+     * @param bgWidth
+     */
+    public abstract void BGSize(int bgWidth,int bgHeight);
+
+
+
+
     /**
      * @return 获取笔迹颜色
      */
@@ -40,6 +52,11 @@ public abstract class BasePen {
      * @return 获取笔迹宽度
      */
     public abstract float getPenWidth();
+
+    /**
+     * @return 获取笔迹图
+     */
+    public abstract Bitmap getBitmap();
 
     /**
      * down状态
