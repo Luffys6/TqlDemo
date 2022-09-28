@@ -301,80 +301,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-//    private void addView() {
-//
-//        myLayout.post(() -> {
-//            int width = myLayout.getWidth();
-//            int height = myLayout.getHeight();
-//            if (posListBeans == null) {
-//                showToast("未获取到服务器数据");
-//                return;
-//            }
-//            for (int i1 = 0; i1 < posListBeans.size(); i1++) {
-//
-//                MyView view = new MyView(getActivity());
-//                myLayout.addView(view);
-//
-//                ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
-////                ViewGroup.MarginLayoutParams margin1 = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
-//
-//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(margin);
-//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(margin);
-//                FrameLayout.LayoutParams ViewParams = new FrameLayout.LayoutParams(margin);
-//
-////                float xRatio1 = (float) width / (float) widths;
-////                float yRatio1 = (float) height / (float) heights;
-////                    thanH = yRatio1;
-////                    thanW = xRatio1;
-////                LogUtils.e("dbj坐标比例",width+"------"+height);
-////                LogUtils.e("dbj坐标比例",xRatio1+"------"+yRatio1);
-//                float xRatio1 = 1.0F;
-//                float yRatio1 = 1.0F;
-//                int x = (int) ((float) (posListBeans.get(i1).getX()) * xRatio1);
-//                int y = (int) ((float) (posListBeans.get(i1).getY()) * yRatio1);
-//                int ax = (int) ((float) (posListBeans.get(i1).getAx()) * xRatio1);
-//                int ay = (int) ((float) (posListBeans.get(i1).getAy()) * yRatio1);
-//                int w = ax - x;
-//                int h = ay - y;
-//                int left = x;
-//                int top = y;
-//
-//                layoutParams.width = w;
-//                layoutParams.height = h;
-//                layoutParams.leftMargin = 0;
-//                layoutParams.topMargin = 6;
-//
-//                params.width = w;
-//                params.height = 32;
-//                params.leftMargin = 0;
-//                params.topMargin = 0;
-//
-//                ViewParams.width = w;
-//                ViewParams.height = h+40;
-//                ViewParams.leftMargin = left;
-//                ViewParams.topMargin = top-32;
-//                 view.getChildAt(1).setBackgroundResource(R.drawable.shape_black_border);
-//                int finalI = i1;
-//                view.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-////                        showReplayDialog(finalI);
-//                        if (pointsBeans != null && pointsBeans.size() > 0) {
-//                            onSave();
-//                            showReplayDialog(finalI, 1);
-//                        } else {
-//                            GetResult(finalI);
-//                        }
-//                    }
-//                });
-//                view.setLayoutParams(ViewParams);
-//                view.getChildAt(1).setLayoutParams(layoutParams);
-//                view.getChildAt(0).setLayoutParams(params);
-//            }
-//        });
-//    }
-
-
     private void addView() {
         myLayout.post(() -> {
             int width = myLayout.getWidth();
@@ -437,7 +363,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
     private int area = -1;
     private Bitmap btm;
     private Bitmap bitmap;
-private int filePos = 0;
+    private int filePos = 0;
+
     private void isRect(int x, int y, Dot dot) {
         if (posListBeans == null) {
             return;
@@ -474,8 +401,8 @@ private int filePos = 0;
                     try {
                         btm = mPenView.getUserWrite();
 //                        BitmapUtils.saveToLocal(btm,   "主.png");
-                        bitmap = Bitmap.createBitmap(btm, posListBeans.get(i).getX(), posListBeans.get(i).getY(), posListBeans.get(i).getAx()-posListBeans.get(i).getX()
-                                , posListBeans.get(i).getAy()-posListBeans.get(i).getY());
+                        bitmap = Bitmap.createBitmap(btm, posListBeans.get(i).getX(), posListBeans.get(i).getY(), posListBeans.get(i).getAx() - posListBeans.get(i).getX()
+                                , posListBeans.get(i).getAy() - posListBeans.get(i).getY());
 
                         BitmapUtils.saveToLocal(bitmap, filePos + ".png");
                         filePos++;
@@ -1550,12 +1477,12 @@ private int filePos = 0;
                 new Handler().postDelayed(() -> ThreadManager.getThreadPool().exeute(new Thread(() -> Replay(index, penview_dialog))), 1000);
             }
         }
-        penview_dialog.post(new Runnable() {
-            @Override
-            public void run() {
-                LogUtils.e("dbj", penview_dialog.getWidth() + penview_dialog.getHeight() + "----");
-            }
-        });
+//        penview_dialog.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                LogUtils.e("dbj", penview_dialog.getWidth() + penview_dialog.getHeight() + "----");
+//            }
+//        });
 
         PopupWindow popupWindow = new PopupWindow(pop, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        popupWindow.setWidth(720);
@@ -1608,7 +1535,7 @@ private int filePos = 0;
                 tv_content_name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        LogUtils.e("dbjbIsReplay", bIsReplay + "--");
+//                        LogUtils.e("dbjbIsReplay", bIsReplay + "--");
                         if (!bIsReplay) {
                             ThreadManager.getThreadPool().exeute(new Thread(() -> ReplayNet1(index, penview_dialog, contentDTO.getSequence())));
                         }

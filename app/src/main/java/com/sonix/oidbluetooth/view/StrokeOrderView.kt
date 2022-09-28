@@ -112,7 +112,7 @@ class StrokeOrderView : View {
 
         val w = measuredWidth
         val h = measuredHeight
-        LogUtils.e("dbj画板", "w=$w,h=$h");
+//        LogUtils.e("dbj画板", "w=$w,h=$h");
         val layer = canvas.saveLayer(0F, 0F, w.toFloat(), h.toFloat(), null)
 
         // 目标Bitmap
@@ -128,7 +128,7 @@ class StrokeOrderView : View {
         dstCanvas!!.translate(0F, -SVG_STROKE_HEIGHT * 7 / 8)
         dstCanvas!!.scale(xTmp, yTmp, 0F, SVG_STROKE_HEIGHT * 7 / 8)
         for (i in strokePaths.size - 1 downTo 0) { // 进度内的 stroke path
-            LogUtils.e("dbj", "currIndex=$currIndex,i=$i");
+//            LogUtils.e("dbj", "currIndex=$currIndex,i=$i");
             if (i <= currIndex && currIndex < strokePaths.size) {
                 dstCanvas!!.drawPath(strokePaths[i], dstPaint)
             }

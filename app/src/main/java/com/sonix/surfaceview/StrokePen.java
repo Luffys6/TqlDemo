@@ -132,6 +132,11 @@ public class StrokePen extends BasePen {
     }
 
     @Override
+    public void BGSize(int bgWidth, int bgHeight) {
+
+    }
+
+    @Override
     public String getPenColor() {
         return penColor;
     }

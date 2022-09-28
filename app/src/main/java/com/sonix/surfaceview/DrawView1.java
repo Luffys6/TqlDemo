@@ -144,7 +144,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         BG_HEIGHT = h;
 //        LAST_PAPER_WIDTH = PAPER_WIDTH;
 //        LAST_PAPER_HEIGHT = PAPER_HEIGHT;
-        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
+//        LogUtils.e("dbj", "BG_WIDTH=" + BG_WIDTH + ",BG_HEIGHT=" + BG_HEIGHT);
 
         bgWrite = Bitmap.createScaledBitmap(mBitmap, w, h, true);
 
@@ -174,10 +174,8 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
         //Log.i(TAG, "surfaceCreated: ");
         //创建线程
         mIsDrawing = true;
-//        mThread = new Thread(this);
         ThreadManager.getThreadPool().exeute(new Thread(this));
 
-//        mThread.start();
 
     }
 
@@ -188,9 +186,7 @@ public class DrawView1 extends SurfaceView implements SurfaceHolder.Callback, Ru
     }
 
     public void reset() {
-        //Log.i(TAG, "clear: ");
         mPen.clear();
-
         if (BG_WIDTH > 0) {
             bgWrite = Bitmap.createScaledBitmap(mBitmap, BG_WIDTH, BG_HEIGHT, true);
         }

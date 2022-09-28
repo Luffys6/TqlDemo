@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.sonix.oidbluetooth.MainActivity;
+import com.sonix.util.LogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -73,6 +74,8 @@ public class NormalPen extends BasePen {
     //是否是涂鸦模式
     private boolean isDoodle = false;
     private int bgWidth, bgHeight;
+    private Bitmap bitmap;
+    private Canvas canvas1;
 
     public NormalPen(Context context) {
         this.mContext = context;
@@ -254,11 +257,12 @@ public class NormalPen extends BasePen {
                     (x + mLastX) / 2,
                     (y + mLastY) / 2);
 
-
-//            bitmap = Bitmap.createBitmap(bgWidth, bgHeight, Bitmap.Config.ARGB_8888);
-//            Canvas canvas1 = new Canvas(bitmap);
-//            draws(canvas1);
-
+            LogUtils.e("dbj", "bgWidth="+bgWidth+",bgHeight="+bgHeight);
+            if (bgWidth>0&&bgHeight>0){
+                bitmap = Bitmap.createBitmap(bgWidth, bgHeight, Bitmap.Config.ARGB_8888);
+                canvas1 = new Canvas(bitmap);
+                draws(canvas1);
+            }
             draws(canvas);
 
             mLastX = 0;//清0
@@ -287,8 +291,7 @@ public class NormalPen extends BasePen {
         doPreDraw(canvas);
     }
 
-    private Bitmap bitmap;
-    private Canvas canvas1;
+
 
     private synchronized void doPreDraw(Canvas canvas) {
         mWeakReferencePathList.clear();
