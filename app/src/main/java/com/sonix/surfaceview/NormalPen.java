@@ -257,7 +257,7 @@ public class NormalPen extends BasePen {
                     (x + mLastX) / 2,
                     (y + mLastY) / 2);
 
-            LogUtils.e("dbj", "bgWidth="+bgWidth+",bgHeight="+bgHeight);
+//            LogUtils.e("dbj", "bgWidth="+bgWidth+",bgHeight="+bgHeight);
             if (bgWidth>0&&bgHeight>0){
                 bitmap = Bitmap.createBitmap(bgWidth, bgHeight, Bitmap.Config.ARGB_8888);
                 canvas1 = new Canvas(bitmap);

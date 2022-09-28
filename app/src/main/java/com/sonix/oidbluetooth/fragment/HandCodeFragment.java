@@ -49,6 +49,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -111,6 +116,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
@@ -404,7 +410,8 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                         bitmap = Bitmap.createBitmap(btm, posListBeans.get(i).getX(), posListBeans.get(i).getY(), posListBeans.get(i).getAx() - posListBeans.get(i).getX()
                                 , posListBeans.get(i).getAy() - posListBeans.get(i).getY());
 
-                        BitmapUtils.saveToLocal(bitmap, filePos + ".png");
+                       File file = BitmapUtils.saveToLocal(bitmap, filePos + ".png");
+                       UploadIMG(file);
                         filePos++;
 //                        Thread.sleep(80);
                     } catch (Exception e) {
@@ -882,6 +889,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 JudgeBean judgeBean = gson.fromJson(s, JudgeBean.class);
                 if (judgeBean.getResponse().equals("ok")) {
                     showToast("打分成功，再次点击查看结果");
+                    filePos = 0;
 //                    dot_word.get(index).clear();
                 }
             }
@@ -2450,6 +2458,38 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public void UploadIMG(File file) {
+        OkHttpClient client = new OkHttpClient();
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        final RequestBody body = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+        requestBody.addFormDataPart("sequence", filePos + "");
+        requestBody.addFormDataPart("file", file.getName(), body);
+        String url = "http://192.168.6.162:8031/tea/upload_file/";
+        final Request request = new Request.Builder().url(url).post(requestBody.build()).build();
+        Call call = client.newCall(request);
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(() -> {
+                    LogUtils.e("dbj","区域" + filePos + "上传失败");
+
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String s = response.body().string();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LogUtils.e("dbj","区域" + filePos + "上传成功"+",-"+s);
+//                        file.delete()
+                    }
+                });
+
+            }
+        });
     }
 
 
