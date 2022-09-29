@@ -402,8 +402,6 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                     pointsBean.setIndex(i);
                     pointsBeans.add(pointsBean);
                     mPenView.processDot(pointX, pointY, pointZ, 2);
-//                    BitmapUtils.getMagicDrawingCache(getActivity(), mPenView, false);
-//                    BitmapUtils.bit(myLayout);
                     try {
                         btm = mPenView.getUserWrite();
 //                        BitmapUtils.saveToLocal(btm,   "主.png");
@@ -2473,7 +2471,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(Call call, IOException e) {
                 getActivity().runOnUiThread(() -> {
-                    LogUtils.e("dbj","区域" + filePos + "上传失败");
+                    LogUtils.e("dbj","第" + filePos + "笔上传失败");
 
                 });
             }
@@ -2483,7 +2481,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        LogUtils.e("dbj","区域" + filePos + "上传成功"+",-"+s);
+                        LogUtils.e("dbj","第" + filePos + "笔上传成功"+",-"+s);
 //                        file.delete()
                     }
                 });
