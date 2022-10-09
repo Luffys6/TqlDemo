@@ -284,7 +284,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
 
     public void getPos() {
         Map<String, String> params = new HashMap<>();
-        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.162:8031/tea/get_word_pos/", new LoadCallBack<String>(getActivity(), false) {
+        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.5:8006/tea/get_word_pos/", new LoadCallBack<String>(getActivity(), false) {
             @Override
             protected void onSuccess(Call call, Response response, String s) {
                 Gson gson = new Gson();
@@ -880,7 +880,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         pointsBeans.clear();
         Map<String, String> params = new HashMap<>();
         params.put("pos_list", pos);
-        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.162:8031/tea/save_pos_new/", new LoadCallBack<String>(getActivity(), false) {
+        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.5:8006/tea/save_pos_new/", new LoadCallBack<String>(getActivity(), false) {
             @Override
             protected void onSuccess(Call call, Response response, String s) {
                 Gson gson = new Gson();
@@ -909,7 +909,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         Map<String, String> params = new HashMap<>();
         params.put("index_pos", index + "");
         LogUtils.e("dbjindex", index + "");
-        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.162:8031/tea/get_word_result/", new LoadCallBack<String>(getActivity(), false) {
+        OkHttpManager.getInstance().postRequest(getActivity(), "http://192.168.6.5:8006/tea/get_word_result/", new LoadCallBack<String>(getActivity(), false) {
             @Override
             protected void onSuccess(Call call, Response response, String s) {
                 Gson gson = new Gson();
@@ -2464,7 +2464,7 @@ public class HandCodeFragment extends Fragment implements View.OnClickListener {
         final RequestBody body = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         requestBody.addFormDataPart("sequence", filePos + "");
         requestBody.addFormDataPart("file", file.getName(), body);
-        String url = "http://192.168.6.162:8031/tea/upload_file/";
+        String url = "http://192.168.6.5:8006/tea/upload_file/";
         final Request request = new Request.Builder().url(url).post(requestBody.build()).build();
         Call call = client.newCall(request);
         call.enqueue(new okhttp3.Callback() {

@@ -64,7 +64,9 @@
             app:img_src="@drawable/selector_width"
             app:text="进去"
             app:text_color="@color/selector_textview"
-            app:text_direction="bottom" />
+            app:text_direction="bottom"
+            android:foreground="?android:attr/selectableItemBackground"
+            />
 
         <com.sonix.oidbluetooth.view.MyImageTextView
             android:id="@+id/itv_color"
